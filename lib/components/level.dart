@@ -29,7 +29,7 @@ class Level extends World with HasGameRef {
     level = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
     add(level);
 
-    _scrollingBackground();
+    // _scrollingBackground();
     _spawningObjects();
     _addCollisions();
 

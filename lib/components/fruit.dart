@@ -16,7 +16,7 @@ class Fruit extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   final _stepTime = 0.05;
 
   bool _collected = false;
-  final hitbox = CustomHitbox.rectangle(offsetX: 10, offsetY: 10, width: 12, height: 12);
+  final hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 10, width: 12, height: 12);
 
   @override
   FutureOr<void> onLoad() {

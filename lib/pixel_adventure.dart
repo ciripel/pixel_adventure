@@ -4,9 +4,9 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:pixel_adventure/components/hud.dart';
 import 'package:pixel_adventure/components/level.dart';
 import 'package:pixel_adventure/components/player.dart';
-import 'package:pixel_adventure/overlays/hud.dart';
 
 class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
   @override

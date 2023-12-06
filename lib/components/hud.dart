@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:pixel_adventure/overlays/heart.dart';
+import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Hud extends PositionComponent with HasGameRef<PixelAdventure> {

@@ -43,5 +43,3 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Tiled temp files
-/assets/tiles/Pixel Adventure.tiled-session

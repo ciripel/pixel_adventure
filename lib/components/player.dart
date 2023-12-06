@@ -43,7 +43,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   final _stepTime = 0.05;
 
   final _gravity = 9.8;
-  final _jumpForce = 260.0;
+  final _jumpForce = 270.0;
   final _terminalVelocity = 300.0;
   double horizontalMovement = 0;
   final _moveSpeed = 100.0;
@@ -55,7 +55,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   int health = 3;
   int fruitsCollected = 0;
   List<CollisionBlock> collisionBlocks = [];
-  final CustomHitbox hitbox = CustomHitbox.rectangle(offsetX: 10, offsetY: 4, width: 14, height: 28);
+  final CustomHitbox hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 7, width: 14, height: 24);
 
   @override
   FutureOr<void> onLoad() {
@@ -76,6 +76,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   void update(double dt) {
     _updatePlayerState();
     _updatePlayerMovement(dt);
+
     _checkHorizontalCollisions();
     _applyGravity(dt);
     _checkVerticalCollisions();
