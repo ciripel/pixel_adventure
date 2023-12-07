@@ -17,8 +17,8 @@ enum Character {
   pinkMan('Pink Man'),
   virtualGuy('Virtual Guy');
 
-  final String fileName;
-  const Character([this.fileName = 'Ninja Frog']);
+  final String filename;
+  const Character([this.filename = 'Ninja Frog']);
 }
 
 enum PlayerState {
@@ -27,8 +27,8 @@ enum PlayerState {
   jumping('Jump'),
   falling('Fall');
 
-  final String fileName;
-  const PlayerState([this.fileName = 'Idle']);
+  final String filename;
+  const PlayerState([this.filename = 'Idle']);
 }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
@@ -127,7 +127,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   SpriteAnimation _spriteAnimation(PlayerState state, int amount) {
     return SpriteAnimation.fromFrameData(
-      game.images.fromCache('Main Characters/${character.fileName}/${state.fileName} (32x32).png'),
+      game.images.fromCache('Main Characters/${character.filename}/${state.filename} (32x32).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
         stepTime: _stepTime,

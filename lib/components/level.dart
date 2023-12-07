@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_adventure/components/background_tile.dart';
+import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/player.dart';
@@ -20,7 +21,6 @@ class Level extends World with HasGameRef {
 
   Level({this.levelName = LevelName.level_01, required this.player});
   late TiledComponent<FlameGame<World>> level;
-  List<CollisionBlock> collisionBlocks = [];
   static const double tileSize = 16;
   static const double backgroundTileSize = tileSize * 4;
 
@@ -33,7 +33,6 @@ class Level extends World with HasGameRef {
     _spawningObjects();
     _addCollisions();
 
-    player.collisionBlocks = collisionBlocks;
     return super.onLoad();
   }
 
@@ -88,6 +87,14 @@ class Level extends World with HasGameRef {
             );
             add(saw);
             break;
+          case 'Checkpoint':
+            final checkpoint = Checkpoint(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(checkpoint);
+            break;
+
           default:
         }
       }
@@ -107,7 +114,7 @@ class Level extends World with HasGameRef {
               isPlatform: true,
             );
 
-            collisionBlocks.add(platform);
+            player.collisionBlocks.add(platform);
             add(platform);
             break;
           default:
@@ -115,7 +122,7 @@ class Level extends World with HasGameRef {
               position: Vector2(collision.x, collision.y),
               size: Vector2(collision.width, collision.height),
             );
-            collisionBlocks.add(block);
+            player.collisionBlocks.add(block);
             add(block);
         }
       }
