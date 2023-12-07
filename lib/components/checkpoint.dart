@@ -22,7 +22,6 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
 
   final _stepTime = 0.05;
 
-  bool active = false;
   final hitbox = const CustomHitbox.rectangle(offsetX: 20, offsetY: 60, width: 8, height: 4);
 
   @override
@@ -45,6 +44,18 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
       ),
     );
     return super.onLoad();
+  }
+
+  @override
+  void update(double dt) {
+    if (game.level.fruits.isEmpty && game.level.checkpointActive == false) {
+      current = CheckpointState.out;
+      game.level.checkpointActive = true;
+      Future.delayed(const Duration(milliseconds: 1300), () {
+        current = CheckpointState.idle;
+      });
+    }
+    super.update(dt);
   }
 
   SpriteAnimation _spriteAnimation(CheckpointState state, int amount) {

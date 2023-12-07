@@ -20,14 +20,19 @@ class Level extends World with HasGameRef {
   final Player player;
 
   Level({this.levelName = LevelName.level_01, required this.player});
-  late TiledComponent<FlameGame<World>> level;
+  late TiledComponent<FlameGame<World>> currentLevel;
   static const double tileSize = 16;
   static const double backgroundTileSize = tileSize * 4;
 
+  List<Fruit> fruits = [];
+  bool checkpointActive = false;
+  bool complete = false;
+  Vector2 endPosition = Vector2.zero();
+
   @override
   FutureOr<void> onLoad() async {
-    level = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
-    add(level);
+    currentLevel = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
+    add(currentLevel);
 
     // _scrollingBackground();
     _spawningObjects();
@@ -37,7 +42,7 @@ class Level extends World with HasGameRef {
   }
 
   void _scrollingBackground() {
-    final backgroundLayer = level.tileMap.getLayer<TileLayer>('Background');
+    final backgroundLayer = currentLevel.tileMap.getLayer<TileLayer>('Background');
 
     final numTilesY = (game.size.y / backgroundTileSize).floor();
     final numTilesX = (game.size.x / backgroundTileSize).floor();
@@ -59,7 +64,7 @@ class Level extends World with HasGameRef {
   }
 
   void _spawningObjects() {
-    final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('SpawnPoints');
+    final spawnPointsLayer = currentLevel.tileMap.getLayer<ObjectGroup>('SpawnPoints');
 
     if (spawnPointsLayer != null) {
       for (final spawnPoint in spawnPointsLayer.objects) {
@@ -74,6 +79,7 @@ class Level extends World with HasGameRef {
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
+            fruits.add(fruit);
             add(fruit);
             break;
           case 'Saw':
@@ -94,7 +100,8 @@ class Level extends World with HasGameRef {
             );
             add(checkpoint);
             break;
-
+          case 'EndPosition':
+            endPosition = Vector2(spawnPoint.x, spawnPoint.y);
           default:
         }
       }
@@ -102,7 +109,7 @@ class Level extends World with HasGameRef {
   }
 
   void _addCollisions() {
-    final collisionsLayer = level.tileMap.getLayer<ObjectGroup>('Collisions');
+    final collisionsLayer = currentLevel.tileMap.getLayer<ObjectGroup>('Collisions');
 
     if (collisionsLayer != null) {
       for (final collision in collisionsLayer.objects) {

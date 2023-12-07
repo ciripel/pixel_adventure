@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/services.dart';
+import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
 import 'package:pixel_adventure/components/fruit.dart';
@@ -54,6 +55,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   bool gotHit = false;
   int health = 3;
   int fruitsCollected = 0;
+
   List<CollisionBlock> collisionBlocks = [];
   final CustomHitbox hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 7, width: 14, height: 24);
 
@@ -74,15 +76,17 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   @override
   void update(double dt) {
-    _updatePlayerState();
-    _updatePlayerMovement(dt);
+    if (!game.level.complete) {
+      _updatePlayerState();
+      _updatePlayerMovement(dt);
 
-    _checkHorizontalCollisions();
-    _applyGravity(dt);
-    _checkVerticalCollisions();
-    _checkFall();
+      _checkHorizontalCollisions();
+      _applyGravity(dt);
+      _checkVerticalCollisions();
+      _checkFall();
 
-    if (health <= 0) removeFromParent();
+      if (health <= 0) removeFromParent();
+    }
     super.update(dt);
   }
 
@@ -105,7 +109,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Fruit) other.collidedWithPlayer();
     if (other is Saw && !gotHit) _gotHit();
-
+    if (other is Checkpoint && game.level.checkpointActive && game.level.complete == false) _finishedLevel();
     super.onCollision(intersectionPoints, other);
   }
 
@@ -262,5 +266,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
           gotHit = false;
         },
     );
+  }
+
+  void _finishedLevel() {
+    game.level.complete = true;
+    current = PlayerState.running;
+    add(MoveEffect.to(game.level.endPosition, EffectController(duration: 1)));
   }
 }

@@ -52,6 +52,9 @@ class Fruit extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
       _collected = true;
     }
 
-    Future.delayed(const Duration(milliseconds: 300), removeFromParent);
+    Future.delayed(const Duration(milliseconds: 300), () {
+      removeFromParent();
+      game.level.fruits.removeWhere((element) => element == this);
+    });
   }
 }

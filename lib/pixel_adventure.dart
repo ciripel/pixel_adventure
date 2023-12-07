@@ -13,6 +13,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   Color backgroundColor() => const Color(0xFF211F30);
 
   final player = Player();
+  late Level level;
   late JoystickComponent joystick;
   bool showJoystick = false;
 
@@ -80,7 +81,8 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   }
 
   void _initializeGame(bool loadHud) {
-    world = Level(player: player);
+    level = Level(player: player);
+    world = level;
     player
       ..gotHit = false
       ..velocity = Vector2.zero()
