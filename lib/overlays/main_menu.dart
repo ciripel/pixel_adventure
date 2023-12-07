@@ -1,23 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class MainMenu extends StatelessWidget {
   // Reference to parent game.
   final PixelAdventure game;
+  final String version;
 
-  const MainMenu({super.key, required this.game});
+  const MainMenu({super.key, required this.game, required this.version});
 
   @override
   Widget build(BuildContext context) {
     const blackTextColor = Color.fromRGBO(0, 0, 0, 0.6);
     const whiteTextColor = Color.fromRGBO(255, 255, 255, 0.9);
+    final isMobile = defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.android;
 
     return Material(
       color: Colors.transparent,
       child: Center(
         child: Container(
           padding: const EdgeInsets.all(10.0),
-          height: 250,
+          height: 300,
           width: 300,
           decoration: const BoxDecoration(
             color: blackTextColor,
@@ -56,13 +59,24 @@ class MainMenu extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                '''Use WASD or Arrow Keys for movement.
+              Text(
+                isMobile
+                    ? 'Collect as many fruits as you can and avoid enemies!'
+                    : '''Use A,D or Arrow Keys for movement.
 Space bar to jump.
 Collect as many fruits as you can and avoid enemies!''',
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   color: whiteTextColor,
+                  fontSize: 14,
+                ),
+              ),
+              SizedBox(height: isMobile ? 60 : 20),
+              Text(
+                'version: $version',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.yellow,
                   fontSize: 14,
                 ),
               ),
