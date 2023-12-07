@@ -6,6 +6,7 @@ import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pixel_adventure/components/hud.dart';
+import 'package:pixel_adventure/components/jump_button.dart';
 import 'package:pixel_adventure/components/level.dart';
 import 'package:pixel_adventure/components/player.dart';
 
@@ -15,7 +16,8 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
   final player = Player();
   late Level level;
-  late JoystickComponent joystick;
+  late JoystickComponent _joystick;
+  late JumpButton _jumpButton;
   bool isMobile = false;
 
   @override
@@ -42,23 +44,25 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
     camera = CameraComponent.withFixedResolution(
       width: 640,
       height: 360,
-      hudComponents: isMobile ? [joystick] : [],
+      hudComponents: isMobile ? [_joystick, _jumpButton] : [],
     );
 
     camera.viewfinder.anchor = Anchor.topLeft;
   }
 
   void _addJoystick() async {
-    joystick = JoystickComponent(
+    _joystick = JoystickComponent(
       knob: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Knob.png'))),
       background: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Joystick.png'))),
-      margin: const EdgeInsets.only(left: 30, bottom: 90),
+      margin: const EdgeInsets.only(left: 32, bottom: JumpButton.margin + JumpButton.buttonSize),
     );
-    add(joystick);
+    add(_joystick);
+    _jumpButton = JumpButton();
+    add(_jumpButton);
   }
 
   void _updateJoystick() {
-    switch (joystick.direction) {
+    switch (_joystick.direction) {
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
       case JoystickDirection.downLeft:

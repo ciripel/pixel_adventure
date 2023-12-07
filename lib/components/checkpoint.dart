@@ -14,10 +14,11 @@ enum CheckpointState {
   const CheckpointState([this.filename = 'No Flag']);
 }
 
-class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with HasGameRef<PixelAdventure> {
+class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with HasGameReference<PixelAdventure> {
   Checkpoint({
     super.position,
     super.size,
+    super.priority = -5,
   });
 
   final _stepTime = 0.05;
@@ -27,7 +28,6 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
   @override
   FutureOr<void> onLoad() {
     // debugMode = true;
-    priority = -8;
 
     animations = {
       CheckpointState.idle: _spriteAnimation(CheckpointState.idle, 10),
@@ -63,7 +63,7 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
       game.images.fromCache('Items/Checkpoints/Checkpoint/Checkpoint (${state.filename}) (64x64).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
-        stepTime: _stepTime,
+        stepTime: amount == 1 ? 1 : _stepTime,
         textureSize: Vector2.all(64),
       ),
     );

@@ -5,11 +5,12 @@ import 'package:flame/components.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
-class Fruit extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
+class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventure> {
   final String fruit;
   Fruit({
     super.position,
     super.size,
+    super.priority = -1,
     this.fruit = 'Apple',
   });
 
@@ -21,7 +22,6 @@ class Fruit extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   @override
   FutureOr<void> onLoad() {
     // debugMode = true;
-    priority = -1;
     animation = _spriteAnimation(17);
     add(
       RectangleHitbox(

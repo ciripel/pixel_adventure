@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import 'package:pixel_adventure/components/level.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
-class Saw extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
+class Saw extends SpriteAnimationComponent with HasGameReference<PixelAdventure> {
   final bool isVertical;
   final double offNeg;
   final double offPos;
@@ -13,6 +13,7 @@ class Saw extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   Saw({
     super.position,
     super.size,
+    super.priority = -3,
     this.isVertical = false,
     this.offNeg = 0,
     this.offPos = 0,
@@ -32,7 +33,6 @@ class Saw extends SpriteAnimationComponent with HasGameRef<PixelAdventure> {
   @override
   FutureOr<void> onLoad() {
     // debugMode = true;
-    priority = -1;
     if (isVertical) {
       rangeNeg = position.y - offNeg * Level.tileSize;
       rangePos = position.y + offPos * Level.tileSize;

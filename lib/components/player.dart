@@ -33,7 +33,7 @@ enum PlayerState {
 }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>
-    with HasGameRef<PixelAdventure>, KeyboardHandler, CollisionCallbacks {
+    with HasGameReference<PixelAdventure>, KeyboardHandler, CollisionCallbacks {
   Character character;
 
   Player({

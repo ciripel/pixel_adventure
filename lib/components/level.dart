@@ -15,7 +15,7 @@ enum LevelName {
   level_02,
 }
 
-class Level extends World with HasGameRef {
+class Level extends World with HasGameReference {
   final LevelName levelName;
   final Player player;
 

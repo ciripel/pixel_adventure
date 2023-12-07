@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
-class Hud extends PositionComponent with HasGameRef<PixelAdventure> {
+class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
   Hud({
     super.position,
     super.size,
@@ -11,7 +11,7 @@ class Hud extends PositionComponent with HasGameRef<PixelAdventure> {
     super.angle,
     super.anchor,
     super.children,
-    super.priority = 5,
+    super.priority = 10,
   });
 
   late TextComponent _scoreTextComponent;

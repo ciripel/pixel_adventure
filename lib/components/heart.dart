@@ -6,7 +6,7 @@ enum HeartState {
   unavailable,
 }
 
-class HeartHealthComponent extends SpriteGroupComponent<HeartState> with HasGameRef<PixelAdventure> {
+class HeartHealthComponent extends SpriteGroupComponent<HeartState> with HasGameReference<PixelAdventure> {
   final int heartNumber;
 
   HeartHealthComponent({
@@ -16,7 +16,7 @@ class HeartHealthComponent extends SpriteGroupComponent<HeartState> with HasGame
     super.scale,
     super.angle,
     super.anchor,
-    super.priority,
+    super.priority = 10,
   });
 
   @override
