@@ -131,6 +131,6 @@
   <object id="108" name="Kiwi" type="Fruit" x="608" y="192" width="32" height="32"/>
   <object id="109" name="Kiwi" type="Fruit" x="608" y="224" width="32" height="32"/>
   <object id="110" type="Checkpoint" x="576" y="16" width="64" height="64"/>
-  <object id="111" name="EndPosition" type="EndPosition" x="640" y="48" width="32" height="32"/>
+  <object id="111" name="EndPosition" type="EndPosition" x="672" y="48" width="32" height="32"/>
  </objectgroup>
 </map>
