@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pixel_adventure/components/hud.dart';
 import 'package:pixel_adventure/components/level.dart';
 import 'package:pixel_adventure/components/player.dart';
@@ -15,13 +16,14 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   final player = Player();
   late Level level;
   late JoystickComponent joystick;
-  bool showJoystick = false;
+  bool isMobile = false;
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
+    isMobile = defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.android;
 
-    if (showJoystick) _addJoystick();
+    if (isMobile) _addJoystick();
     _setCamera();
 
     _initializeGame(true);
@@ -31,7 +33,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
   @override
   void update(double dt) {
-    if (showJoystick) _updateJoystick();
+    if (isMobile) _updateJoystick();
     if (player.health <= 0) overlays.add('GameOver');
     super.update(dt);
   }
@@ -40,7 +42,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
     camera = CameraComponent.withFixedResolution(
       width: 640,
       height: 360,
-      hudComponents: showJoystick ? [joystick] : [],
+      hudComponents: isMobile ? [joystick] : [],
     );
 
     camera.viewfinder.anchor = Anchor.topLeft;
