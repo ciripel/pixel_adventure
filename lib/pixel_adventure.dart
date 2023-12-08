@@ -97,13 +97,8 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   }
 
   void _initializeGame({bool loadHud = false, LevelName levelName = LevelName.level_01}) {
-    level = Level(player: player, levelName: levelName);
-    world = level;
-    player
-      ..gotHit = false
-      ..velocity = Vector2.zero()
-      ..horizontalMovement = 0
-      ..scale.x = 1;
+    world = level = Level(player: player, levelName: levelName)..init();
+    player.init();
 
     if (loadHud) camera.viewport.add(Hud());
   }

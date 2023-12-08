@@ -49,19 +49,27 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   double horizontalMovement = 0;
   final _moveSpeed = 100.0;
   Vector2 velocity = Vector2.zero();
-  Vector2 startingPosition = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
   bool gotHit = false;
   int health = 3;
   int fruitsCollected = 0;
+  bool startAnimationFinished = false;
+
+  void init() {
+    gotHit = false;
+    velocity = Vector2.zero();
+    horizontalMovement = 0;
+    scale.x = 1;
+    startAnimationFinished = false;
+    collisionBlocks = [];
+  }
 
   List<CollisionBlock> collisionBlocks = [];
   final CustomHitbox hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 7, width: 14, height: 24);
 
   @override
   FutureOr<void> onLoad() {
-    startingPosition = Vector2(position.x, position.y);
     _loadAllAnimations();
     // debugMode = true;
 
@@ -76,10 +84,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   @override
   void update(double dt) {
-    if (!game.level.complete) {
+    if (!game.level.started) _enterPlayer();
+
+    if (!game.level.complete && startAnimationFinished) {
       _updatePlayerState();
       _updatePlayerMovement(dt);
-
       _checkHorizontalCollisions();
       _applyGravity(dt);
       _checkVerticalCollisions();
@@ -125,8 +134,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       PlayerState.jumping: jumpingAnimation,
       PlayerState.falling: fallingAnimation,
     };
-
-    current = PlayerState.idle;
   }
 
   SpriteAnimation _spriteAnimation(PlayerState state, int amount) {
@@ -137,6 +144,17 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         stepTime: _stepTime,
         textureSize: Vector2.all(32),
       ),
+    );
+  }
+
+  void _enterPlayer() {
+    current = PlayerState.running;
+    game.level.started = true;
+    add(
+      MoveEffect.to(
+        game.level.startPosition,
+        EffectController(duration: 1),
+      )..onComplete = () => startAnimationFinished = true,
     );
   }
 
@@ -255,7 +273,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     add(
       SequenceEffect([
         MoveEffect.to(
-          startingPosition,
+          game.level.startPosition,
           EffectController(duration: 0),
         ),
         OpacityEffect.fadeOut(
@@ -269,15 +287,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _finishedLevel() {
-    game.level.complete = true;
     current = PlayerState.running;
+    game.level.complete = true;
     add(
       MoveEffect.to(
         game.level.endPosition,
         EffectController(duration: 1),
-      )..onComplete = () {
-          game.loadNextLevel();
-        },
+      )..onComplete = () => game.loadNextLevel(),
     );
   }
 }

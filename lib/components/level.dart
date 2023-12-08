@@ -13,6 +13,7 @@ import 'package:pixel_adventure/components/saw.dart';
 enum LevelName {
   level_01,
   level_02,
+  level_03,
 }
 
 class Level extends World with HasGameReference {
@@ -26,8 +27,16 @@ class Level extends World with HasGameReference {
 
   List<Fruit> fruits = [];
   bool checkpointActive = false;
+  bool started = false;
   bool complete = false;
+  Vector2 startPosition = Vector2.zero();
   Vector2 endPosition = Vector2.zero();
+
+  void init() {
+    checkpointActive = false;
+    started = false;
+    complete = false;
+  }
 
   @override
   FutureOr<void> onLoad() async {
@@ -73,6 +82,9 @@ class Level extends World with HasGameReference {
             player.position = Vector2(spawnPoint.x, spawnPoint.y);
             add(player);
             break;
+          case 'StartPosition':
+            startPosition = Vector2(spawnPoint.x, spawnPoint.y);
+            break;
           case 'Fruit':
             final fruit = Fruit(
               fruit: spawnPoint.name,
@@ -102,6 +114,7 @@ class Level extends World with HasGameReference {
             break;
           case 'EndPosition':
             endPosition = Vector2(spawnPoint.x, spawnPoint.y);
+            break;
           default:
         }
       }
