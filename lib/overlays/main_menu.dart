@@ -1,3 +1,4 @@
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
@@ -44,6 +45,7 @@ class MainMenu extends StatelessWidget {
                 height: 75,
                 child: ElevatedButton(
                   onPressed: () {
+                    if (game.playSoundEffects) FlameAudio.loopLongAudio('snatch-octo_sounds.aac', volume: 0.6);
                     game.overlays.remove('MainMenu');
                   },
                   style: ElevatedButton.styleFrom(

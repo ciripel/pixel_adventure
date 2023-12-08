@@ -21,11 +21,14 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   late JoystickComponent _joystick;
   late JumpButton _jumpButton;
   bool isMobile = false;
+  bool playSoundEffects = true;
+  double soundEffectsVolume = 1.0;
 
   @override
   FutureOr<void> onLoad() async {
     debugPrint('Version: ${Pubspec.parse(await rootBundle.loadString('pubspec.yaml')).version}');
     await images.loadAllImages();
+
     isMobile = defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.android;
 
     if (isMobile) _addJoystick();
