@@ -31,8 +31,8 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
 
     animations = {
       CheckpointState.idle: _spriteAnimation(CheckpointState.idle, 10),
-      CheckpointState.none: _spriteAnimation(CheckpointState.none, 1),
-      CheckpointState.out: _spriteAnimation(CheckpointState.out, 26),
+      CheckpointState.none: _spriteAnimation(CheckpointState.none, 1)..loop = false,
+      CheckpointState.out: _spriteAnimation(CheckpointState.out, 26)..loop = false,
     };
     current = CheckpointState.none;
 
@@ -47,13 +47,13 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
   }
 
   @override
-  void update(double dt) {
+  void update(double dt) async {
     if (game.level.fruits.isEmpty && game.level.checkpointActive == false) {
       current = CheckpointState.out;
       game.level.checkpointActive = true;
-      Future.delayed(const Duration(milliseconds: 1300), () {
-        current = CheckpointState.idle;
-      });
+
+      await animationTicker?.completed;
+      current = CheckpointState.idle;
     }
     super.update(dt);
   }

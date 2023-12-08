@@ -23,7 +23,6 @@ class Level extends World with HasGameReference {
   Level({this.levelName = LevelName.level_01, required this.player});
   late TiledComponent<FlameGame<World>> currentLevel;
   static const double tileSize = 16;
-  static const double backgroundTileSize = tileSize * 4;
 
   List<Fruit> fruits = [];
   bool checkpointActive = false;
@@ -52,24 +51,11 @@ class Level extends World with HasGameReference {
 
   void _scrollingBackground() {
     final backgroundLayer = currentLevel.tileMap.getLayer<TileLayer>('Background');
+    if (backgroundLayer == null) return;
 
-    final numTilesY = (game.size.y / backgroundTileSize).floor();
-    final numTilesX = (game.size.x / backgroundTileSize).floor();
-
-    if (backgroundLayer != null) {
-      final backgroundColor = backgroundLayer.properties.getValue<String>('BackgroundColor');
-
-      for (var y = 0; y < game.size.y / numTilesY; y++) {
-        for (var x = 0; x < numTilesX; x++) {
-          final backgroundTile = BackgroundTile(
-            color: backgroundColor ?? 'Gray',
-            position: Vector2(x * backgroundTileSize, y * backgroundTileSize - backgroundTileSize),
-          );
-
-          add(backgroundTile);
-        }
-      }
-    }
+    final backgroundColor = backgroundLayer.properties.getValue<String>('BackgroundColor');
+    final backgroundTile = BackgroundTile(color: backgroundColor ?? 'Gray', position: Vector2(0, 0));
+    add(backgroundTile);
   }
 
   void _spawningObjects() {
@@ -98,10 +84,10 @@ class Level extends World with HasGameReference {
             final saw = Saw(
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
-              isVertical: spawnPoint.properties.getValue<bool>('isVertical') ?? false,
-              offNeg: spawnPoint.properties.getValue<double>('offNeg') ?? 0,
-              offPos: spawnPoint.properties.getValue<double>('offPos') ?? 0,
-              speedMultiplier: spawnPoint.properties.getValue<double>('speedMultiplier') ?? 1,
+              isVertical: spawnPoint.properties.getValue<bool>('isVertical') ?? Saw().isVertical,
+              offNeg: spawnPoint.properties.getValue<double>('offNeg') ?? Saw().offNeg,
+              offPos: spawnPoint.properties.getValue<double>('offPos') ?? Saw().offPos,
+              speedMultiplier: spawnPoint.properties.getValue<double>('speedMultiplier') ?? Saw().speedMultiplier,
             );
             add(saw);
             break;

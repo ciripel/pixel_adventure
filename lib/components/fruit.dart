@@ -45,16 +45,15 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
     );
   }
 
-  void collidedWithPlayer() {
+  void collidedWithPlayer() async {
     if (!_collected) {
       animation = _spriteAnimation(6, collected: true);
       game.player.fruitsCollected++;
       _collected = true;
     }
+    await animationTicker?.completed;
 
-    Future.delayed(const Duration(milliseconds: 300), () {
-      removeFromParent();
-      game.level.fruits.removeWhere((element) => element == this);
-    });
+    removeFromParent();
+    game.level.fruits.removeWhere((element) => element == this);
   }
 }

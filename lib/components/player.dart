@@ -124,11 +124,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+  void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Fruit) other.collidedWithPlayer();
     if (other is Saw && !gotHit) _gotHit();
     if (other is Checkpoint && game.level.checkpointActive && game.level.complete == false) _finishedLevel();
-    super.onCollision(intersectionPoints, other);
+    super.onCollisionStart(intersectionPoints, other);
   }
 
   void _loadAllAnimations() {
@@ -264,9 +264,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     add(
       OpacityEffect.fadeOut(
         EffectController(alternate: true, duration: 0.1, repeatCount: 5),
-      )..onComplete = () {
-          gotHit = false;
-        },
+      )..onComplete = () => gotHit = false,
     );
   }
 
@@ -289,9 +287,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
           EffectController(alternate: true, duration: 0.1, repeatCount: 5),
         ),
       ])
-        ..onComplete = () {
-          gotHit = false;
-        },
+        ..onComplete = () => gotHit = false,
     );
   }
 

@@ -35,6 +35,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
     final fruitSprite = await game.loadSprite('Items/Fruits/Melon.png', srcSize: Vector2.all(32));
     add(
       SpriteComponent(
+        priority: priority,
         sprite: fruitSprite,
         position: Vector2(game.size.x - 20, 20),
         size: Vector2.all(32),
