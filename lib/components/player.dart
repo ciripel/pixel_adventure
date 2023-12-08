@@ -56,6 +56,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   int fruitsCollected = 0;
   bool startAnimationFinished = false;
 
+  final fixedDeltaTime = 1 / 60;
+  double accumulatedTime = 0;
+
   void init() {
     gotHit = false;
     velocity = Vector2.zero();
@@ -84,18 +87,24 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   @override
   void update(double dt) {
-    if (!game.level.started) _enterPlayer();
+    accumulatedTime += dt;
+    while (accumulatedTime >= fixedDeltaTime) {
+      if (!game.level.started) _enterPlayer();
 
-    if (!game.level.complete && startAnimationFinished) {
-      _updatePlayerState();
-      _updatePlayerMovement(dt);
-      _checkHorizontalCollisions();
-      _applyGravity(dt);
-      _checkVerticalCollisions();
-      _checkFall();
+      if (!game.level.complete && startAnimationFinished) {
+        _updatePlayerState();
+        _updatePlayerMovement(fixedDeltaTime);
+        _checkHorizontalCollisions();
+        _applyGravity(fixedDeltaTime);
+        _checkVerticalCollisions();
+        _checkFall();
 
-      if (health <= 0) removeFromParent();
+        if (health <= 0) removeFromParent();
+      }
+
+      accumulatedTime -= fixedDeltaTime;
     }
+
     super.update(dt);
   }
 
