@@ -271,6 +271,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   void _finishedLevel() {
     game.level.complete = true;
     current = PlayerState.running;
-    add(MoveEffect.to(game.level.endPosition, EffectController(duration: 1)));
+    add(
+      MoveEffect.to(
+        game.level.endPosition,
+        EffectController(duration: 1),
+      )..onComplete = () {
+          game.loadNextLevel();
+        },
+    );
   }
 }

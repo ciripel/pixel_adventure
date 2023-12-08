@@ -16,7 +16,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   @override
   Color backgroundColor() => const Color(0xFF211F30);
 
-  final player = Player();
+  final player = Player(character: Character.virtualGuy);
   late Level level;
   late JoystickComponent _joystick;
   late JumpButton _jumpButton;
@@ -31,7 +31,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
     if (isMobile) _addJoystick();
     _setCamera();
 
-    _initializeGame(true);
+    _initializeGame(loadHud: true);
 
     return super.onLoad();
   }
@@ -86,11 +86,18 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
     player
       ..fruitsCollected = 0
       ..health = 3;
-    _initializeGame(false);
+    _initializeGame();
   }
 
-  void _initializeGame(bool loadHud) {
-    level = Level(player: player);
+  void loadNextLevel() {
+    if (level.levelName.index < LevelName.values.length - 1) {
+      return _initializeGame(levelName: LevelName.values[level.levelName.index + 1]);
+    }
+    overlays.add('GameOver');
+  }
+
+  void _initializeGame({bool loadHud = false, LevelName levelName = LevelName.level_01}) {
+    level = Level(player: player, levelName: levelName);
     world = level;
     player
       ..gotHit = false
