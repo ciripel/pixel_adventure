@@ -80,6 +80,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       RectangleHitbox(
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
         size: Vector2(hitbox.width, hitbox.height),
+        isSolid: true,
       ),
     );
     return super.onLoad();

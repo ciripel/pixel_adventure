@@ -16,7 +16,6 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
 
   final _stepTime = 0.05;
 
-  bool _collected = false;
   final hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 10, width: 12, height: 12);
 
   @override
@@ -28,6 +27,7 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
         size: Vector2(hitbox.width, hitbox.height),
         collisionType: CollisionType.passive,
+        isSolid: true,
       ),
     );
     return super.onLoad();
@@ -46,13 +46,9 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
   }
 
   void collidedWithPlayer() async {
-    if (!_collected) {
-      animation = _spriteAnimation(6, collected: true);
-      game.player.fruitsCollected++;
-      _collected = true;
-    }
+    animation = _spriteAnimation(6, collected: true);
+    game.player.fruitsCollected++;
     await animationTicker?.completed;
-
     removeFromParent();
     game.level.fruits.removeWhere((element) => element == this);
   }
