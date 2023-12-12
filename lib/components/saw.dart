@@ -20,7 +20,8 @@ class Saw extends SpriteAnimationComponent with HasGameReference<PixelAdventure>
     this.speedMultiplier = 1,
   });
 
-  final _sawSpeed = 0.04;
+  final _stepTime = 0.05;
+
   double _moveSpeed = 75;
   final double _minSpeed = 0;
   final double _maxSpeed = 300;
@@ -51,7 +52,7 @@ class Saw extends SpriteAnimationComponent with HasGameReference<PixelAdventure>
       game.images.fromCache('Traps/Saw/On (38x38).png'),
       SpriteAnimationData.sequenced(
         amount: amount,
-        stepTime: _sawSpeed,
+        stepTime: _stepTime,
         textureSize: Vector2.all(38),
       ),
     );

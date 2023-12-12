@@ -68,6 +68,7 @@ flutter:
       - assets/audio/
       - assets/tiles/
       - assets/images/Background/
+      - assets/images/Enemies/Chicken/
       - assets/images/HUD/
       - assets/images/Items/Checkpoints/Checkpoint/
       - assets/images/Items/Fruits/

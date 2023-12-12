@@ -5,6 +5,7 @@ import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 import 'package:pixel_adventure/components/background_tile.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
+import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/player.dart';
@@ -97,6 +98,15 @@ class Level extends World with HasGameReference {
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
             add(checkpoint);
+            break;
+          case 'Chicken':
+            final chicken = Chicken(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+              offNeg: spawnPoint.properties.getValue<double>('offNeg') ?? Chicken().offNeg,
+              offPos: spawnPoint.properties.getValue<double>('offPos') ?? Chicken().offPos,
+            );
+            add(chicken);
             break;
           case 'EndPosition':
             endPosition = Vector2(spawnPoint.x, spawnPoint.y);

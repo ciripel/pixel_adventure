@@ -45,7 +45,7 @@ class MainMenu extends StatelessWidget {
                 height: 75,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (game.playSoundEffects) FlameAudio.loopLongAudio('snatch-octo_sounds.aac', volume: 0.6);
+                    if (game.playMusic) FlameAudio.loopLongAudio('snatch-octo_sounds.aac', volume: 0.6);
                     game.overlays.remove('MainMenu');
                   },
                   style: ElevatedButton.styleFrom(

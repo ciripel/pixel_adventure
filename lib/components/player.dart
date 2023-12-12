@@ -6,6 +6,7 @@ import 'package:flame/effects.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
+import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
 import 'package:pixel_adventure/components/fruit.dart';
@@ -57,7 +58,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   int fruitsCollected = 0;
   bool startAnimationFinished = false;
 
-  final fixedDeltaTime = 1 / 60;
+  final fixedDeltaTime = 1 / 60; // 60 FPS
   double accumulatedTime = 0;
 
   void init() {
@@ -131,6 +132,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     if (other is Saw && !gotHit) _gotHit();
     if (other is Checkpoint && game.level.checkpointActive && game.level.complete == false) _finishedLevel();
     super.onCollisionStart(intersectionPoints, other);
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Chicken && !gotHit) other.collidedWithPlayer();
+    super.onCollision(intersectionPoints, other);
   }
 
   void _loadAllAnimations() {
@@ -265,6 +272,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     if (health <= 0) return;
 
     gotHit = true;
+    print('GotHit');
     add(
       OpacityEffect.fadeOut(
         EffectController(alternate: true, duration: 0.1, repeatCount: 5),
@@ -306,5 +314,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         EffectController(duration: 1),
       )..onComplete = () => game.loadNextLevel(),
     );
+  }
+
+  void collidedWithEnemy() {
+    _gotHit();
   }
 }
