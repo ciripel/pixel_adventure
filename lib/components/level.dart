@@ -29,6 +29,7 @@ class Level extends World with HasGameReference {
   bool checkpointActive = false;
   bool started = false;
   bool complete = false;
+  Stopwatch stopwatch = Stopwatch();
   Vector2 startPosition = Vector2.zero();
   Vector2 endPosition = Vector2.zero();
 

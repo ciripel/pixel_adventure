@@ -102,7 +102,10 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         _checkVerticalCollisions();
         _checkFall();
 
-        if (health <= 0) removeFromParent();
+        if (health <= 0) {
+          game.level.stopwatch.stop();
+          removeFromParent();
+        }
       }
 
       accumulatedTime -= fixedDeltaTime;
@@ -167,7 +170,10 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
       MoveEffect.to(
         game.level.startPosition,
         EffectController(duration: 1),
-      )..onComplete = () => startAnimationFinished = true,
+      )..onComplete = () {
+          startAnimationFinished = true;
+          game.level.stopwatch.start();
+        },
     );
   }
 
@@ -302,6 +308,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     if (game.playSoundEffects) FlameAudio.play('end_level.wav');
     current = PlayerState.running;
     game.level.complete = true;
+    game.level.stopwatch.stop();
     add(
       MoveEffect.to(
         game.level.endPosition,

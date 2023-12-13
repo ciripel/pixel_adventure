@@ -16,3 +16,5 @@ bool checkCollision(Player player, CollisionBlock block) {
       fixedX < block.x + block.width &&
       fixedX + playerWidth > block.x);
 }
+
+String format(Duration d) => d.toString().substring(2, 11);
