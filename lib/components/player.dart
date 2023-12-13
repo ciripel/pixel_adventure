@@ -141,16 +141,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _loadAllAnimations() {
-    final idleAnimation = _spriteAnimation(PlayerState.idle, 11);
-    final runningAnimation = _spriteAnimation(PlayerState.running, 12);
-    final jumpingAnimation = _spriteAnimation(PlayerState.jumping, 1);
-    final fallingAnimation = _spriteAnimation(PlayerState.falling, 1);
-
     animations = {
-      PlayerState.idle: idleAnimation,
-      PlayerState.running: runningAnimation,
-      PlayerState.jumping: jumpingAnimation,
-      PlayerState.falling: fallingAnimation,
+      PlayerState.falling: _spriteAnimation(PlayerState.falling, 1)..loop = false,
+      PlayerState.idle: _spriteAnimation(PlayerState.idle, 11),
+      PlayerState.jumping: _spriteAnimation(PlayerState.jumping, 1)..loop = false,
+      PlayerState.running: _spriteAnimation(PlayerState.running, 12),
     };
   }
 
@@ -272,7 +267,6 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     if (health <= 0) return;
 
     gotHit = true;
-    print('GotHit');
     add(
       OpacityEffect.fadeOut(
         EffectController(alternate: true, duration: 0.1, repeatCount: 5),

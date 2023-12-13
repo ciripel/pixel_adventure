@@ -17,8 +17,7 @@ enum ChickenState {
   const ChickenState([this.filename = 'Idle']);
 }
 
-class Chicken extends SpriteAnimationGroupComponent<ChickenState>
-    with HasGameReference<PixelAdventure>, CollisionCallbacks {
+class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameReference<PixelAdventure> {
   final double offNeg;
   final double offPos;
   Chicken({
