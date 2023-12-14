@@ -40,6 +40,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   Player({
     super.position,
+    super.anchor = Anchor.topCenter,
     this.character = Character.ninjaFrog,
   });
 
@@ -226,12 +227,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         if (checkCollision(this, block)) {
           if (velocity.x > 0) {
             velocity.x = 0;
-            position.x = block.x - hitbox.offsetX - hitbox.width;
+            position.x = block.x - size.x + hitbox.offsetX + hitbox.width;
             break;
           }
           if (velocity.x < 0) {
             velocity.x = 0;
-            position.x = block.x + block.width + hitbox.width + hitbox.offsetX;
+            position.x = block.x + block.width + size.x - hitbox.offsetX - hitbox.width;
             break;
           }
         }
@@ -290,7 +291,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _checkFall() {
-    final fallen = position.y > game.size.y + size.y && !gotHit;
+    final fallen = position.y > 368 + size.y && !gotHit;
 
     if (!fallen) return;
     if (game.playSoundEffects) FlameAudio.play('hit_hurt.wav');

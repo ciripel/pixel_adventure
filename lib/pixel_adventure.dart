@@ -49,12 +49,12 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
   void _setCamera() {
     camera = CameraComponent.withFixedResolution(
-      width: 640,
-      height: 360,
+      width: 500,
+      height: 250,
       hudComponents: isMobile ? [_joystick, _jumpButton] : [],
     );
 
-    camera.viewfinder.anchor = Anchor.topLeft;
+    camera.follow(player);
   }
 
   void _addJoystick() async {
