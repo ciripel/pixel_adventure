@@ -88,7 +88,7 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
   void collidedWithPlayer() async {
     if (game.playSoundEffects) FlameAudio.play('pickup_fruit.wav');
     animation = _spriteAnimation(6, collected: true);
-    game.player.fruitsPoints += game.level.fruits.firstWhere((Fruit fruit) => fruit == this).fruit.value;
+    game.level.fruitsPoints += game.level.fruits.firstWhere((Fruit fruit) => fruit == this).fruit.value;
     await animationTicker?.completed;
     removeFromParent();
     game.level.fruits.removeWhere((fruit) => fruit == this);

@@ -36,10 +36,22 @@ class Level extends World with HasGameReference {
   Vector2 startPosition = Vector2.zero();
   Vector2 endPosition = Vector2.zero();
 
+  int fruitsPoints = 0;
+  int enemiesPoints = 0;
+  int completeTimePoints = 0;
+  int totalPoints = 0;
+
   void init() {
     checkpointActive = false;
     started = false;
     complete = false;
+  }
+
+  void resetScore() {
+    fruitsPoints = 0;
+    enemiesPoints = 0;
+    completeTimePoints = 0;
+    totalPoints = 0;
   }
 
   @override

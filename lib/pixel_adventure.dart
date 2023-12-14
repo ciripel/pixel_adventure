@@ -87,14 +87,14 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
   }
 
   void reset() {
-    player
-      ..fruitsPoints = 0
-      ..health = 3;
+    player.health = 3;
     initializeGame();
   }
 
   void initializeGame({bool loadHud = false, LevelName levelName = LevelName.level_01}) {
-    world = level = Level(player: player, levelName: levelName)..init();
+    world = level = Level(player: player, levelName: levelName)
+      ..init()
+      ..resetScore();
     player.init();
 
     if (loadHud) camera.viewport.add(Hud());

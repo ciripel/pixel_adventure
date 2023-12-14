@@ -129,7 +129,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
       if (game.playSoundEffects) FlameAudio.play('stomp.wav');
       gotStomped = true;
       current = ChickenState.hit;
-      game.player.enemiesPoints += killPoints;
+      game.level.enemiesPoints += killPoints;
       game.player.velocity.y = -_bounceHeight;
       await animationTicker?.completed;
       removeFromParent();

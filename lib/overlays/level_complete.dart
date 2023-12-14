@@ -13,11 +13,11 @@ class LevelComplete extends StatelessWidget {
     const blackTextColor = Color.fromRGBO(0, 0, 0, 0.6);
     const whiteTextColor = Color.fromRGBO(255, 255, 255, 0.9);
 
-    final fruitsPoints = game.player.fruitsPoints;
-    final enemiesPoints = game.player.enemiesPoints;
+    final fruitsPoints = game.level.fruitsPoints;
+    final enemiesPoints = game.level.enemiesPoints;
     final healthCoefficient = ((game.player.health / 3) * 100).floor();
-    final completeTimePoints = game.player.completeTimePoints;
-    final totalPoints = game.player.totalPoints;
+    final completeTimePoints = game.level.completeTimePoints;
+    final totalPoints = game.level.totalPoints;
 
     return Material(
       color: Colors.transparent,
@@ -95,6 +95,7 @@ class LevelComplete extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     game.overlays.remove('LevelComplete');
+                    game.player.previousScore = game.player.totalScore;
                     loadNextLevel();
                   },
                   style: ElevatedButton.styleFrom(
