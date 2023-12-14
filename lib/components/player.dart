@@ -55,7 +55,11 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   bool hasJumped = false;
   bool gotHit = false;
   int health = 3;
-  int fruitsCollected = 0;
+  int fruitsPoints = 0;
+  int enemiesPoints = 0;
+  int completeTimePoints = 0;
+  int totalPoints = 0;
+
   bool startAnimationFinished = false;
 
   final fixedDeltaTime = 1 / 60; // 60 FPS
@@ -68,6 +72,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     scale.x = 1;
     startAnimationFinished = false;
     collisionBlocks = [];
+  }
+
+  void resetScore() {
+    fruitsPoints = 0;
+    enemiesPoints = 0;
+    completeTimePoints = 0;
+    totalPoints = 0;
   }
 
   List<CollisionBlock> collisionBlocks = [];
@@ -110,6 +121,8 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
       accumulatedTime -= fixedDeltaTime;
     }
+
+    totalPoints = fruitsPoints + enemiesPoints + completeTimePoints;
 
     super.update(dt);
   }
@@ -309,11 +322,14 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     current = PlayerState.running;
     game.level.complete = true;
     game.level.stopwatch.stop();
+    completeTimePoints +=
+        (health / 3 * (game.level.levelName.maxPointsCoefficient - game.level.stopwatch.elapsedMilliseconds) / 1000)
+            .floor();
     add(
       MoveEffect.to(
         game.level.endPosition,
         EffectController(duration: 1),
-      )..onComplete = () => game.loadNextLevel(),
+      )..onComplete = () => game.overlays.add('LevelComplete'),
     );
   }
 

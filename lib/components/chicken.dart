@@ -34,6 +34,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
   // 32 match exactly the player jump distance over the chicken
   static const _chickenVerticalRange = 0;
   static const _bounceHeight = 200.0;
+  static const killPoints = 100;
   final hitbox = const CustomHitbox.rectangle(offsetX: 4, offsetY: 6, width: 24, height: 26);
 
   double rangeNeg = 0;
@@ -128,6 +129,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
       if (game.playSoundEffects) FlameAudio.play('stomp.wav');
       gotStomped = true;
       current = ChickenState.hit;
+      game.player.enemiesPoints += killPoints;
       game.player.velocity.y = -_bounceHeight;
       await animationTicker?.completed;
       removeFromParent();

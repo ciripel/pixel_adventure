@@ -12,9 +12,12 @@ import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/saw.dart';
 
 enum LevelName {
-  level_01,
-  level_02,
-  level_03,
+  level_01(60000),
+  level_02(60000),
+  level_03(300000);
+
+  final int maxPointsCoefficient;
+  const LevelName([this.maxPointsCoefficient = 0]);
 }
 
 class Level extends World with HasGameReference {
@@ -75,7 +78,7 @@ class Level extends World with HasGameReference {
             break;
           case 'Fruit':
             final fruit = Fruit(
-              fruit: spawnPoint.name,
+              fruit: FruitType.fromFilename(spawnPoint.name),
               position: Vector2(spawnPoint.x, spawnPoint.y),
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );

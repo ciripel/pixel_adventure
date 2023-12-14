@@ -35,7 +35,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
     if (isMobile) _addJoystick();
     _setCamera();
 
-    _initializeGame(loadHud: true);
+    initializeGame(loadHud: true);
 
     return super.onLoad();
   }
@@ -88,19 +88,12 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, DragCa
 
   void reset() {
     player
-      ..fruitsCollected = 0
+      ..fruitsPoints = 0
       ..health = 3;
-    _initializeGame();
+    initializeGame();
   }
 
-  void loadNextLevel() {
-    if (level.levelName.index < LevelName.values.length - 1) {
-      return _initializeGame(levelName: LevelName.values[level.levelName.index + 1]);
-    }
-    overlays.add('GameOver');
-  }
-
-  void _initializeGame({bool loadHud = false, LevelName levelName = LevelName.level_01}) {
+  void initializeGame({bool loadHud = false, LevelName levelName = LevelName.level_01}) {
     world = level = Level(player: player, levelName: levelName)..init();
     player.init();
 

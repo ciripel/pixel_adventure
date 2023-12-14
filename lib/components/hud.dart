@@ -49,7 +49,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
 
     // Score
     _scoreTextComponent = TextComponent(
-      text: '${game.player.fruitsCollected}',
+      text: '${game.player.totalPoints}',
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 10,
@@ -76,7 +76,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
 
   @override
   void update(double dt) {
-    _scoreTextComponent.text = '${game.player.fruitsCollected}';
+    _scoreTextComponent.text = '${game.player.totalPoints}';
     _timerTextComponent.text = format(game.level.stopwatch.elapsed);
   }
 }
