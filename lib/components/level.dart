@@ -72,7 +72,7 @@ class Level extends World with HasGameReference {
 
     final backgroundColor = backgroundLayer.properties.getValue<String>('BackgroundColor');
     final backgroundTile = BackgroundTile(color: backgroundColor ?? 'Gray', position: Vector2(0, 0));
-    add(backgroundTile);
+    game.camera.backdrop = backgroundTile;
   }
 
   void _spawningObjects() {
