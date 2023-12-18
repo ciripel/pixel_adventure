@@ -108,7 +108,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         _checkHorizontalCollisions();
         _applyGravity(fixedDeltaTime);
         _checkVerticalCollisions();
-        _checkFall();
+        // _checkFall();
 
         if (health <= 0) {
           game.level.stopwatch.stop();

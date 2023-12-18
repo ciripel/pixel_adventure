@@ -23,7 +23,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
     // Lives
     for (var i = 1; i <= game.player.health; i++) {
       final positionX = 15 * i;
-      await add(
+      add(
         HeartHealthComponent(
           heartNumber: i,
           position: Vector2(positionX.toDouble(), 10),
