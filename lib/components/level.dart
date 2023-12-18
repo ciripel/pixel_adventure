@@ -26,7 +26,6 @@ class Level extends World with HasGameReference {
 
   Level({this.levelName = LevelName.level_01, required this.player});
   late TiledComponent<FlameGame<World>> currentLevel;
-  static const double tileSize = 16;
 
   List<Fruit> fruits = [];
   bool checkpointActive = false;
@@ -62,6 +61,11 @@ class Level extends World with HasGameReference {
     // _scrollingBackground();
     _spawningObjects();
     _addCollisions();
+    final hideout = SpriteComponent.fromImage(game.images.fromCache('Terrain/brick.png'))
+      ..priority = 9
+      ..anchor = Anchor.topLeft
+      ..position = Vector2(160, 1712);
+    add(hideout);
 
     return super.onLoad();
   }

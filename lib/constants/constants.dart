@@ -8,6 +8,8 @@ abstract class Constants {
   static const double controlsSize = 64;
   static const double spaceBetweenButtons = 10;
 
+  static const double tileSize = 16;
+
   //text style
   static const hudTextStyle = TextStyle(
     fontSize: 10,

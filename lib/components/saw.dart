@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/components/level.dart';
+import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Saw extends SpriteAnimationComponent with HasGameReference<PixelAdventure> {
@@ -35,11 +35,11 @@ class Saw extends SpriteAnimationComponent with HasGameReference<PixelAdventure>
   FutureOr<void> onLoad() {
     // debugMode = true;
     if (isVertical) {
-      rangeNeg = position.y - offNeg * Level.tileSize;
-      rangePos = position.y + offPos * Level.tileSize;
+      rangeNeg = position.y - offNeg * Constants.tileSize;
+      rangePos = position.y + offPos * Constants.tileSize;
     } else {
-      rangeNeg = position.x - offNeg * Level.tileSize;
-      rangePos = position.x + offPos * Level.tileSize;
+      rangeNeg = position.x - offNeg * Constants.tileSize;
+      rangePos = position.x + offPos * Constants.tileSize;
     }
 
     animation = _spriteAnimation(8);

@@ -5,7 +5,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
 import 'package:pixel_adventure/components/custom_hitbox.dart';
-import 'package:pixel_adventure/components/level.dart';
+import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum ChickenState {
@@ -92,8 +92,8 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
   }
 
   void _calculateRange() {
-    rangeNeg = position.x - offNeg * Level.tileSize;
-    rangePos = position.x + offPos * Level.tileSize;
+    rangeNeg = position.x - offNeg * Constants.tileSize;
+    rangePos = position.x + offPos * Constants.tileSize;
   }
 
   void _movement(double dt) {
