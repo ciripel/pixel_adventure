@@ -2,18 +2,22 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class JumpButton extends SpriteComponent with HasGameReference<PixelAdventure>, TapCallbacks {
-  JumpButton({super.priority = 10, super.anchor = Anchor.bottomRight});
-
-  static const double margin = 20;
-  static const double buttonSize = 64;
+  JumpButton({
+    super.priority = 10,
+    super.anchor = Anchor.bottomRight,
+  });
 
   @override
   FutureOr<void> onLoad() {
     sprite = Sprite(game.images.fromCache('HUD/Jump_button.png'));
-    position = Vector2(500 - margin, 240 - margin);
+    position = Vector2(
+      Constants.horizontalResolution - Constants.controlsMargin,
+      Constants.verticalResolution - Constants.controlsMargin,
+    );
 
     return super.onLoad();
   }

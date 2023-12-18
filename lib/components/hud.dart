@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
 import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/components/utils.dart';
+import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
@@ -33,15 +33,10 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
     }
 
     // Timer
+
     _timerTextComponent = TextComponent(
       text: format(game.level.stopwatch.elapsed),
-      textRenderer: TextPaint(
-        style: const TextStyle(
-          fontSize: 10,
-          fontFamily: 'PressStart2P',
-          color: Color.fromRGBO(187, 170, 13, 1),
-        ),
-      ),
+      textRenderer: TextPaint(style: Constants.hudTextStyle),
       anchor: Anchor.center,
       position: Vector2(game.size.x / 2, 20),
     );
@@ -50,13 +45,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
     // Score
     _scoreTextComponent = TextComponent(
       text: '${game.player.totalScore}',
-      textRenderer: TextPaint(
-        style: const TextStyle(
-          fontSize: 10,
-          fontFamily: 'PressStart2P',
-          color: Color.fromRGBO(187, 170, 13, 1),
-        ),
-      ),
+      textRenderer: TextPaint(style: Constants.hudTextStyle),
       anchor: Anchor.centerRight,
       position: Vector2(game.size.x - 35, 20),
     );
