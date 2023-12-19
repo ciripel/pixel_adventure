@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/components/heart.dart';
-import 'package:pixel_adventure/components/utils.dart';
+import 'package:pixel_adventure/components/HUD/heart.dart';
 import 'package:pixel_adventure/constants/constants.dart';
+import 'package:pixel_adventure/helpers/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Hud extends PositionComponent with HasGameReference<PixelAdventure> {

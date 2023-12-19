@@ -6,12 +6,12 @@ import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:pixel_adventure/components/hud.dart';
-import 'package:pixel_adventure/components/jump_button.dart';
-import 'package:pixel_adventure/components/left_button.dart';
+import 'package:pixel_adventure/components/HUD/hud.dart';
+import 'package:pixel_adventure/components/HUD/jump_button.dart';
+import 'package:pixel_adventure/components/HUD/left_button.dart';
+import 'package:pixel_adventure/components/HUD/right_button.dart';
 import 'package:pixel_adventure/components/level.dart';
 import 'package:pixel_adventure/components/player.dart';
-import 'package:pixel_adventure/components/right_button.dart';
 import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
@@ -19,7 +19,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
   @override
   Color backgroundColor() => const Color(0xFF211F30);
 
-  final player = Player(character: Character.virtualGuy);
+  final player = Player(character: Character.pinkMan);
   late Level level;
   late JoystickComponent _joystick;
   bool useJoystick = false;

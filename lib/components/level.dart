@@ -8,8 +8,10 @@ import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
+import 'package:pixel_adventure/components/hideout.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/saw.dart';
+import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum LevelName {
   level_01(60000),
@@ -20,7 +22,7 @@ enum LevelName {
   const LevelName([this.maxPointsCoefficient = 0]);
 }
 
-class Level extends World with HasGameReference {
+class Level extends World with HasGameReference<PixelAdventure> {
   final LevelName levelName;
   final Player player;
 
@@ -61,11 +63,6 @@ class Level extends World with HasGameReference {
     // _scrollingBackground();
     _spawningObjects();
     _addCollisions();
-    final hideout = SpriteComponent.fromImage(game.images.fromCache('Terrain/brick.png'))
-      ..priority = 9
-      ..anchor = Anchor.topLeft
-      ..position = Vector2(160, 1712);
-    add(hideout);
 
     return super.onLoad();
   }
@@ -153,11 +150,24 @@ class Level extends World with HasGameReference {
             player.collisionBlocks.add(platform);
             add(platform);
             break;
+          case 'Hideout':
+            final hideout = Hideout(
+              type: HideoutType.fromFilename(collision.properties.getValue<String>('type') ?? Hideout().type.filename),
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+            );
+            add(hideout);
+            final block = CollisionBlock(
+              position: Vector2(collision.x, collision.y),
+              size: Vector2(collision.width, collision.height),
+            )..priority;
+            player.collisionBlocks.add(block);
+            break;
           default:
             final block = CollisionBlock(
               position: Vector2(collision.x, collision.y),
               size: Vector2(collision.width, collision.height),
-            );
+            )..priority;
             player.collisionBlocks.add(block);
             add(block);
         }

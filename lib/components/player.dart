@@ -8,10 +8,10 @@ import 'package:flutter/services.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
-import 'package:pixel_adventure/components/custom_hitbox.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/saw.dart';
-import 'package:pixel_adventure/components/utils.dart';
+import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum Character {
