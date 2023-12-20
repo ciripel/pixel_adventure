@@ -6,10 +6,10 @@ enum HeartState {
   unavailable,
 }
 
-class HeartHealthComponent extends SpriteGroupComponent<HeartState> with HasGameReference<PixelAdventure> {
+class Health extends SpriteGroupComponent<HeartState> with HasGameReference<PixelAdventure> {
   final int heartNumber;
 
-  HeartHealthComponent({
+  Health({
     required this.heartNumber,
     required super.position,
     required super.size,
@@ -24,12 +24,12 @@ class HeartHealthComponent extends SpriteGroupComponent<HeartState> with HasGame
     await super.onLoad();
     final availableSprite = await game.loadSprite(
       'HUD/Heart.png',
-      srcSize: Vector2.all(16),
+      srcSize: Vector2.all(347),
     );
 
     final unavailableSprite = await game.loadSprite(
       'HUD/Heart_empty.png',
-      srcSize: Vector2.all(16),
+      srcSize: Vector2.all(1),
     );
 
     sprites = {

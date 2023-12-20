@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/components/HUD/heart.dart';
+import 'package:pixel_adventure/components/HUD/health.dart';
 import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/helpers/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
@@ -20,29 +20,32 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
 
   @override
   Future<void> onLoad() async {
-    // Lives
+    _printLives();
+    _printTimer();
+    await _printScore();
+  }
+
+  @override
+  void update(double dt) {
+    _printLives();
+    _scoreTextComponent.text = '${game.player.totalScore}';
+    _timerTextComponent.text = format(game.level.stopwatch.elapsed);
+  }
+
+  void _printLives() {
     for (var i = 1; i <= game.player.health; i++) {
       final positionX = 15 * i;
       add(
-        HeartHealthComponent(
+        Health(
           heartNumber: i,
           position: Vector2(positionX.toDouble(), 10),
           size: Vector2.all(20),
         ),
       );
     }
+  }
 
-    // Timer
-
-    _timerTextComponent = TextComponent(
-      text: format(game.level.stopwatch.elapsed),
-      textRenderer: TextPaint(style: Constants.hudTextStyle),
-      anchor: Anchor.center,
-      position: Vector2(game.size.x / 2, 20),
-    );
-    add(_timerTextComponent);
-
-    // Score
+  Future<void> _printScore() async {
     _scoreTextComponent = TextComponent(
       text: '${game.player.totalScore}',
       textRenderer: TextPaint(style: Constants.hudTextStyle),
@@ -63,9 +66,13 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
     );
   }
 
-  @override
-  void update(double dt) {
-    _scoreTextComponent.text = '${game.player.totalScore}';
-    _timerTextComponent.text = format(game.level.stopwatch.elapsed);
+  void _printTimer() {
+    _timerTextComponent = TextComponent(
+      text: format(game.level.stopwatch.elapsed),
+      textRenderer: TextPaint(style: Constants.hudTextStyle),
+      anchor: Anchor.center,
+      position: Vector2(game.size.x / 2, 20),
+    );
+    add(_timerTextComponent);
   }
 }

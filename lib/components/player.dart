@@ -9,6 +9,7 @@ import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
+import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/components/saw.dart';
 import 'package:pixel_adventure/helpers/custom_hitbox.dart';
 import 'package:pixel_adventure/helpers/utils.dart';
@@ -142,6 +143,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   @override
   void onCollisionStart(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Fruit) other.collidedWithPlayer();
+    if (other is Heart) other.collidedWithPlayer();
     if (other is Saw && !gotHit) _gotHit();
     if (other is Checkpoint && game.level.checkpointActive && game.level.complete == false) _finishedLevel();
     super.onCollisionStart(intersectionPoints, other);

@@ -8,6 +8,7 @@ import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
+import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/components/hideout.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/saw.dart';
@@ -97,6 +98,13 @@ class Level extends World with HasGameReference<PixelAdventure> {
             );
             fruits.add(fruit);
             add(fruit);
+            break;
+          case 'Heart':
+            final heart = Heart(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(heart);
             break;
           case 'Saw':
             final saw = Saw(

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="274" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="211">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="274" height="45" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="215">
  <tileset firstgid="1" source="Pixel Adventure.tsx"/>
  <layer id="1" name="Background" width="274" height="45">
   <properties>
@@ -89,7 +89,6 @@
   <object id="194" x="240" y="128" width="16" height="64"/>
   <object id="195" x="256" y="128" width="3856" height="16"/>
   <object id="203" x="4112" y="128" width="16" height="464"/>
-  <object id="210" x="-64" y="256" width="3856" height="16"/>
  </objectgroup>
  <objectgroup id="2" name="SpawnPoints">
   <object id="3" name="Player" type="Player" x="272" y="544" width="32" height="32"/>
@@ -99,7 +98,7 @@
   <object id="99" name="Pineapple" type="Fruit" x="1328" y="544" width="32" height="32"/>
   <object id="111" name="EndPosition" type="EndPosition" x="4064" y="544" width="32" height="32"/>
   <object id="112" type="Checkpoint" x="3968" y="512" width="64" height="64"/>
-  <object id="113" name="StartPosition" type="StartPosition" x="336" y="544" width="32" height="32"/>
+  <object id="113" name="StartPosition" type="StartPosition" x="352" y="544" width="32" height="32"/>
   <object id="114" name="Chicken" type="Chicken" x="1280" y="544" width="32" height="32">
    <properties>
     <property name="offNeg" type="float" value="14"/>
@@ -161,7 +160,7 @@
     <property name="speedMultiplier" type="float" value="2"/>
    </properties>
   </object>
-  <object id="189" name="Strawberry" type="Fruit" x="256" y="240" width="32" height="32"/>
+  <object id="189" name="Heart" type="Heart" x="261" y="244" width="23" height="23"/>
   <object id="196" name="Apple" type="Fruit" x="672" y="544" width="32" height="32"/>
   <object id="197" name="Apple" type="Fruit" x="752" y="544" width="32" height="32"/>
   <object id="198" name="Bananas" type="Fruit" x="576" y="464" width="32" height="32"/>
