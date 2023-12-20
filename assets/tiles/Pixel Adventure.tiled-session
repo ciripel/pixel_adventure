@@ -19,21 +19,21 @@
                 3
             ],
             "scale": 3,
-            "selectedLayer": 1,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 1600,
-                "y": 959.6666666666665
+                "x": 517.6666666666667,
+                "y": 571
             }
         },
         "level_02.tmx": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320,
-                "y": 184
+                "x": 352.5,
+                "y": 195
             }
         },
         "level_03.tmx": {
@@ -41,7 +41,7 @@
                 2
             ],
             "scale": 2.5828124999999997,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 320.193587416818,
                 "y": 184.29522081064735
@@ -67,6 +67,7 @@
         "level_01.tmx",
         "Pixel Adventure.tsx"
     ],
+    "resizeMap.removeObjects": false,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,

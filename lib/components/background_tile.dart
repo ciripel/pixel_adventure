@@ -2,26 +2,30 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/parallax.dart';
-import 'package:flutter/painting.dart';
+import 'package:pixel_adventure/pixel_adventure.dart';
 
-class BackgroundTile extends ParallaxComponent {
-  final String color;
+class Background extends ParallaxComponent<PixelAdventure> {
+  final String type;
 
-  BackgroundTile({
+  Background({
+    super.size,
     super.position,
     super.priority = -10,
-    this.color = 'Gray',
+    this.type = 'Super Mountain Dusk',
   });
-
-  final double scrollSpeed = 40;
 
   @override
   FutureOr<void> onLoad() async {
     parallax = await game.loadParallax(
-      [ParallaxImageData('Background/$color.png')],
-      baseVelocity: Vector2(0, -scrollSpeed),
-      fill: LayerFill.none,
-      repeat: ImageRepeat.repeat,
+      [
+        ParallaxImageData('Background/$type/sky.png'),
+        ParallaxImageData('Background/$type/far-clouds.png'),
+        ParallaxImageData('Background/$type/near-clouds.png'),
+        ParallaxImageData('Background/$type/far-mountains.png'),
+        ParallaxImageData('Background/$type/mountains.png'),
+        ParallaxImageData('Background/$type/trees.png'),
+      ],
+      velocityMultiplierDelta: Vector2(1.2, 0),
     );
     return super.onLoad();
   }

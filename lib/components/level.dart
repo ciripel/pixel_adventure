@@ -28,6 +28,7 @@ class Level extends World with HasGameReference<PixelAdventure> {
 
   Level({this.levelName = LevelName.level_01, required this.player});
   late TiledComponent<FlameGame<World>> currentLevel;
+  late Background background;
 
   List<Fruit> fruits = [];
   bool checkpointActive = false;
@@ -60,7 +61,7 @@ class Level extends World with HasGameReference<PixelAdventure> {
     currentLevel = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
     add(currentLevel);
 
-    // _scrollingBackground();
+    _scrollingBackground();
     _spawningObjects();
     _addCollisions();
 
@@ -68,12 +69,11 @@ class Level extends World with HasGameReference<PixelAdventure> {
   }
 
   void _scrollingBackground() {
-    final backgroundLayer = currentLevel.tileMap.getLayer<TileLayer>('Background');
-    if (backgroundLayer == null) return;
-
-    final backgroundColor = backgroundLayer.properties.getValue<String>('BackgroundColor');
-    final backgroundTile = BackgroundTile(color: backgroundColor ?? 'Gray', position: Vector2(0, 0));
-    game.camera.backdrop = backgroundTile;
+    background = Background(
+      position: Vector2(256, 144),
+      size: Vector2(3856, 432),
+    );
+    add(background);
   }
 
   void _spawningObjects() {

@@ -211,6 +211,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
     velocity.x = horizontalMovement * _moveSpeed;
     position.x += velocity.x * dt;
+    game.level.background.parallax!.baseVelocity.x = velocity.x / 10;
   }
 
   void _playerJump(double dt) {
