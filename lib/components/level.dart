@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:pixel_adventure/components/background_tile.dart';
+import 'package:pixel_adventure/components/background.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
@@ -61,14 +61,14 @@ class Level extends World with HasGameReference<PixelAdventure> {
     currentLevel = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
     add(currentLevel);
 
-    _scrollingBackground();
+    _addBackground();
     _spawningObjects();
     _addCollisions();
 
     return super.onLoad();
   }
 
-  void _scrollingBackground() {
+  void _addBackground() {
     background = Background(
       position: Vector2(256, 144),
       size: Vector2(3856, 432),

@@ -19,7 +19,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
   @override
   Color backgroundColor() => const Color(0xFF211F30);
 
-  final player = Player(character: Character.pinkMan);
+  final player = Player();
   late Level level;
   late JoystickComponent _joystick;
   bool useJoystick = false;

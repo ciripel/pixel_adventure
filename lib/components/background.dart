@@ -25,7 +25,7 @@ class Background extends ParallaxComponent<PixelAdventure> {
         ParallaxImageData('Background/$type/mountains.png'),
         ParallaxImageData('Background/$type/trees.png'),
       ],
-      velocityMultiplierDelta: Vector2(1.2, 0),
+      velocityMultiplierDelta: Vector2(1.15, 0),
     );
     return super.onLoad();
   }
