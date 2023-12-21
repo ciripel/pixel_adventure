@@ -20,7 +20,7 @@ class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventur
   @override
   FutureOr<void> onLoad() {
     // debugMode = true;
-    animation = _spriteAnimation(8);
+    animation = _spriteAnimation(6);
     add(
       RectangleHitbox(
         position: Vector2(hitbox.offsetX, hitbox.offsetY),

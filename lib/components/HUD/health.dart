@@ -24,7 +24,7 @@ class Health extends SpriteGroupComponent<HeartState> with HasGameReference<Pixe
     await super.onLoad();
     final availableSprite = await game.loadSprite(
       'HUD/Heart.png',
-      srcSize: Vector2.all(347),
+      srcSize: Vector2.all(32),
     );
 
     final unavailableSprite = await game.loadSprite(
