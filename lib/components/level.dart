@@ -165,10 +165,14 @@ class Level extends World with HasGameReference<PixelAdventure> {
               size: Vector2(collision.width, collision.height),
             );
             add(hideout);
+
+            final isBlock = collision.properties.getValue<bool>('isBlock') ?? true;
+            if (!isBlock) break;
+
             final block = CollisionBlock(
               position: Vector2(collision.x, collision.y),
               size: Vector2(collision.width, collision.height),
-            )..priority;
+            );
             player.collisionBlocks.add(block);
             break;
           default:
