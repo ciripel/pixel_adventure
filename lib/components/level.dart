@@ -15,12 +15,13 @@ import 'package:pixel_adventure/components/saw.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum LevelName {
-  level_01(60000),
-  level_02(60000),
-  level_03(300000);
+  level_01(maxPointsCoefficient: 60000, levelHeight: 576),
+  level_02(maxPointsCoefficient: 60000, levelHeight: 368),
+  level_03(maxPointsCoefficient: 300000, levelHeight: 368);
 
   final int maxPointsCoefficient;
-  const LevelName([this.maxPointsCoefficient = 0]);
+  final int levelHeight;
+  const LevelName({required this.maxPointsCoefficient, required this.levelHeight});
 }
 
 class Level extends World with HasGameReference<PixelAdventure> {

@@ -109,7 +109,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         _checkHorizontalCollisions();
         _applyGravity(fixedDeltaTime);
         _checkVerticalCollisions();
-        // _checkFall();
+        _checkFall();
 
         if (health <= 0) {
           game.level.stopwatch.stop();
@@ -294,7 +294,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _checkFall() {
-    final fallen = position.y > 368 + size.y && !gotHit;
+    final fallen = position.y > game.level.levelName.levelHeight + size.y && !gotHit;
 
     if (!fallen) return;
     if (game.playSoundEffects) FlameAudio.play('hit_hurt.wav');
