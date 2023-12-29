@@ -10,11 +10,11 @@ import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum ChickenState {
   hit('Hit'),
-  idle(),
+  idle('Idle'),
   run('Run');
 
   final String filename;
-  const ChickenState([this.filename = 'Idle']);
+  const ChickenState(this.filename);
 }
 
 class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameReference<PixelAdventure> {

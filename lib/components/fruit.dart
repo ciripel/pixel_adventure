@@ -7,8 +7,8 @@ import 'package:pixel_adventure/helpers/custom_hitbox.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum FruitType {
-  unknown(),
-  apple(value: 1),
+  unknown(filename: 'Apple', value: 0),
+  apple(filename: 'Apple', value: 1),
   bananas(filename: 'Bananas', value: 2),
   cherries(filename: 'Cherries', value: 3),
   kiwi(filename: 'Kiwi', value: 4),
@@ -19,7 +19,7 @@ enum FruitType {
 
   final String filename;
   final int value;
-  const FruitType({this.filename = 'Apple', this.value = 0});
+  const FruitType({required this.filename, required this.value});
 
   static FruitType fromFilename(String filename) {
     switch (filename) {

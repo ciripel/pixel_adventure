@@ -17,22 +17,22 @@ import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum Character {
   maskDude('Mask Dude'),
-  ninjaFrog(),
+  ninjaFrog('Ninja Frog'),
   pinkMan('Pink Man'),
   virtualGuy('Virtual Guy');
 
   final String filename;
-  const Character([this.filename = 'Ninja Frog']);
+  const Character(this.filename);
 }
 
 enum PlayerState {
-  idle(),
+  idle('Idle'),
   running('Run'),
   jumping('Jump'),
   falling('Fall');
 
   final String filename;
-  const PlayerState([this.filename = 'Idle']);
+  const PlayerState(this.filename);
 }
 
 class Player extends SpriteAnimationGroupComponent<PlayerState>

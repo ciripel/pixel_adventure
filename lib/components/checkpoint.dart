@@ -7,11 +7,11 @@ import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum CheckpointState {
   idle('Flag Idle'),
-  none(),
+  none('No Flag'),
   out('Flag Out');
 
   final String filename;
-  const CheckpointState([this.filename = 'No Flag']);
+  const CheckpointState(this.filename);
 }
 
 class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with HasGameReference<PixelAdventure> {

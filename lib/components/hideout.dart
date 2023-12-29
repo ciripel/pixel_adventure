@@ -4,12 +4,12 @@ import 'package:flame/components.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum HideoutType {
-  brick(),
+  brick('Brick (48x48)'),
   grassLeftSide('Grass Left Side (48x96)');
 
   final String filename;
 
-  const HideoutType([this.filename = 'Brick (48x48)']);
+  const HideoutType(this.filename);
 
   static HideoutType fromFilename(String filename) {
     switch (filename) {
