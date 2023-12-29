@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:pixel_adventure/components/background.dart';
+// import 'package:pixel_adventure/components/background.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
 import 'package:pixel_adventure/components/collision_block.dart';
@@ -30,7 +30,7 @@ class Level extends World with HasGameReference<PixelAdventure> {
 
   Level({this.levelName = LevelName.level_01, required this.player});
   late TiledComponent<FlameGame<World>> currentLevel;
-  late Background background;
+  // late Background background;
 
   List<Fruit> fruits = [];
   bool checkpointActive = false;
@@ -63,20 +63,20 @@ class Level extends World with HasGameReference<PixelAdventure> {
     currentLevel = await TiledComponent.load('${levelName.name}.tmx', Vector2.all(16));
     add(currentLevel);
 
-    _addBackground();
+    // _addBackground();
     _spawningObjects();
     _addCollisions();
 
     return super.onLoad();
   }
 
-  void _addBackground() {
-    background = Background(
-      position: Vector2(256, 144),
-      size: Vector2(3856, 432),
-    );
-    add(background);
-  }
+  // void _addBackground() {
+  //   background = Background(
+  //     position: Vector2(256, 144),
+  //     size: Vector2(3856, 432),
+  //   );
+  //   add(background);
+  // }
 
   void _spawningObjects() {
     final spawnPointsLayer = currentLevel.tileMap.getLayer<ObjectGroup>('SpawnPoints');
