@@ -86,7 +86,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
 
     camera
       ..follow(player)
-      ..setBounds(Rectangle.fromLTWH(-765, -360, 5417, 1184), considerViewport: true);
+      ..setBounds(Rectangle.fromLTWH(-1082, -512, 6052, 1489), considerViewport: true);
   }
 
   void _updateJoystick() {
