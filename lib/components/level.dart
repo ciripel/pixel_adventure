@@ -72,7 +72,7 @@ class Level extends World with HasGameReference<PixelAdventure> {
 
   void _addBackground() {
     background = Background(
-      position: Vector2(256, 144),
+      position: Vector2(16, 16),
       size: Vector2(3856, 432),
     );
     add(background);

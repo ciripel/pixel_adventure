@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -83,7 +84,9 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
           : [],
     );
 
-    camera.follow(player);
+    camera
+      ..follow(player)
+      ..setBounds(Rectangle.fromLTWH(-765, -360, 5417, 1184), considerViewport: true);
   }
 
   void _updateJoystick() {
