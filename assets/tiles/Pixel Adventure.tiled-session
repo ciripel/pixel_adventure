@@ -22,38 +22,38 @@
                 7
             ],
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
-            "scale": 0.25,
-            "selectedLayer": 2,
+            "scale": 0.33,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 1336,
-                "y": 304
+                "x": 2275.7575757575755,
+                "y": 460.60606060606074
             }
         },
         "level_02.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 320,
-                "y": 184
+                "x": 319,
+                "y": 183
             }
         },
         "level_03.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 319.99999999999994,
-                "y": 184
+                "x": 319.3333333333333,
+                "y": 183.33333333333331
             }
         },
         "level_04.tmx": {

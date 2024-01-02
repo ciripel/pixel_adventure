@@ -5,7 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:pixel_adventure/constants/constants.dart';
-import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum ChickenState {
@@ -35,7 +35,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
   static const _chickenVerticalRange = 0;
   static const _bounceHeight = 200.0;
   static const killPoints = 100;
-  final hitbox = const CustomHitbox.rectangle(offsetX: 4, offsetY: 6, width: 24, height: 26);
+  final hitbox = const CustomShape.rectangle(left: 4, top: 6, width: 24, height: 26);
 
   double rangeNeg = 0;
   double rangePos = 0;
@@ -52,7 +52,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
 
     add(
       RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        position: Vector2(hitbox.left, hitbox.top),
         size: Vector2(hitbox.width, hitbox.height),
         isSolid: true,
       ),

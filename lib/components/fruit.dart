@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum FruitType {
@@ -56,7 +56,7 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
 
   final _stepTime = 0.05;
 
-  final hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 10, width: 12, height: 12);
+  final hitbox = const CustomShape.rectangle(left: 10, top: 10, width: 12, height: 12);
 
   @override
   FutureOr<void> onLoad() {
@@ -64,7 +64,7 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
     animation = _spriteAnimation(17);
     add(
       RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        position: Vector2(hitbox.left, hitbox.top),
         size: Vector2(hitbox.width, hitbox.height),
         collisionType: CollisionType.passive,
         isSolid: true,

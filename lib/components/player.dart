@@ -11,7 +11,7 @@ import 'package:pixel_adventure/components/collision_block.dart';
 import 'package:pixel_adventure/components/fruit.dart';
 import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/components/saw.dart';
-import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/helpers/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
@@ -80,7 +80,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   List<CollisionBlock> collisionBlocks = [];
-  final CustomHitbox hitbox = const CustomHitbox.rectangle(offsetX: 10, offsetY: 7, width: 14, height: 24);
+  final CustomShape hitbox = const CustomShape.rectangle(left: 10, top: 7, width: 14, height: 24);
 
   @override
   FutureOr<void> onLoad() {
@@ -89,7 +89,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
     add(
       RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        position: Vector2(hitbox.left, hitbox.top),
         size: Vector2(hitbox.width, hitbox.height),
         isSolid: true,
       ),
@@ -231,12 +231,12 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         if (checkCollision(this, block)) {
           if (velocity.x > 0) {
             velocity.x = 0;
-            position.x = block.x - size.x + hitbox.offsetX + hitbox.width;
+            position.x = block.x - size.x + hitbox.left + hitbox.width;
             break;
           }
           if (velocity.x < 0) {
             velocity.x = 0;
-            position.x = block.x + block.width + size.x - hitbox.offsetX - hitbox.width;
+            position.x = block.x + block.width + size.x - hitbox.left - hitbox.width;
             break;
           }
         }
@@ -258,7 +258,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         if (checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
-            position.y = block.y - hitbox.height - hitbox.offsetY;
+            position.y = block.y - hitbox.height - hitbox.top;
             isOnGround = true;
             break;
           }
@@ -267,13 +267,13 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
         if (checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;
-            position.y = block.y - hitbox.height - hitbox.offsetY;
+            position.y = block.y - hitbox.height - hitbox.top;
             isOnGround = true;
             break;
           }
           if (velocity.y < 0) {
             velocity.y = 0;
-            position.y = block.y + block.height - hitbox.offsetY;
+            position.y = block.y + block.height - hitbox.top;
             break;
           }
         }

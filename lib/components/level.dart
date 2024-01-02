@@ -12,16 +12,39 @@ import 'package:pixel_adventure/components/heart.dart';
 import 'package:pixel_adventure/components/hideout.dart';
 import 'package:pixel_adventure/components/player.dart';
 import 'package:pixel_adventure/components/saw.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum LevelName {
-  level_01(maxPointsCoefficient: 60000, levelHeight: 464),
-  level_02(maxPointsCoefficient: 60000, levelHeight: 368),
-  level_03(maxPointsCoefficient: 300000, levelHeight: 368);
+  level_01(
+    maxPointsCoefficient: 60000,
+    levelHeight: 464,
+    background: CustomShape.rectangle(left: 16, top: 16, width: 3856, height: 432),
+    cameraBounds: CustomShape.rectangle(left: -1082, top: -512, width: 6052, height: 1489),
+  ),
+  level_02(
+    maxPointsCoefficient: 60000,
+    levelHeight: 368,
+    background: CustomShape.rectangle(left: 0, top: 0, width: 640, height: 368),
+    cameraBounds: CustomShape.rectangle(left: -1092, top: -512, width: 2824, height: 1397),
+  ),
+  level_03(
+    maxPointsCoefficient: 300000,
+    levelHeight: 368,
+    background: CustomShape.rectangle(left: 0, top: 0, width: 640, height: 368),
+    cameraBounds: CustomShape.rectangle(left: -1092, top: -512, width: 2824, height: 1397),
+  );
 
   final int maxPointsCoefficient;
   final int levelHeight;
-  const LevelName({required this.maxPointsCoefficient, required this.levelHeight});
+  final CustomShape background;
+  final CustomShape cameraBounds;
+  const LevelName({
+    required this.maxPointsCoefficient,
+    required this.levelHeight,
+    required this.background,
+    required this.cameraBounds,
+  });
 }
 
 class Level extends World with HasGameReference<PixelAdventure> {
@@ -72,8 +95,8 @@ class Level extends World with HasGameReference<PixelAdventure> {
 
   void _addBackground() {
     background = Background(
-      position: Vector2(16, 16),
-      size: Vector2(3856, 432),
+      position: Vector2(levelName.background.left, levelName.background.top),
+      size: Vector2(levelName.background.width, levelName.background.height),
     );
     add(background);
   }

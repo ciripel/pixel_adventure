@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventure> {
@@ -15,7 +15,7 @@ class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventur
 
   final _stepTime = 0.1;
 
-  final hitbox = const CustomHitbox.rectangle(offsetX: 3, offsetY: 4, width: 14, height: 13);
+  final hitbox = const CustomShape.rectangle(left: 3, top: 4, width: 14, height: 13);
 
   @override
   FutureOr<void> onLoad() {
@@ -23,7 +23,7 @@ class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventur
     animation = _spriteAnimation(6);
     add(
       RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        position: Vector2(hitbox.left, hitbox.top),
         size: Vector2(hitbox.width, hitbox.height),
         collisionType: CollisionType.passive,
         isSolid: true,

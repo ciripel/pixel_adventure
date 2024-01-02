@@ -84,9 +84,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
           : [],
     );
 
-    camera
-      ..follow(player)
-      ..setBounds(Rectangle.fromLTWH(-1082, -512, 6052, 1489), considerViewport: true);
+    camera.follow(player);
   }
 
   void _updateJoystick() {
@@ -117,6 +115,15 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
       ..init()
       ..resetScore();
     player.init();
+    camera.setBounds(
+      Rectangle.fromLTWH(
+        level.levelName.cameraBounds.left,
+        level.levelName.cameraBounds.top,
+        level.levelName.cameraBounds.width,
+        level.levelName.cameraBounds.height,
+      ),
+      considerViewport: true,
+    );
 
     if (loadHud) camera.viewport.add(Hud());
   }

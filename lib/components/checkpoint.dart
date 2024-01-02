@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:pixel_adventure/helpers/custom_hitbox.dart';
+import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
 enum CheckpointState {
@@ -23,7 +23,7 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
 
   final _stepTime = 0.05;
 
-  final hitbox = const CustomHitbox.rectangle(offsetX: 20, offsetY: 60, width: 8, height: 4);
+  final hitbox = const CustomShape.rectangle(left: 20, top: 60, width: 8, height: 4);
 
   @override
   FutureOr<void> onLoad() {
@@ -38,7 +38,7 @@ class Checkpoint extends SpriteAnimationGroupComponent<CheckpointState> with Has
 
     add(
       RectangleHitbox(
-        position: Vector2(hitbox.offsetX, hitbox.offsetY),
+        position: Vector2(hitbox.left, hitbox.top),
         size: Vector2(hitbox.width, hitbox.height),
         collisionType: CollisionType.passive,
       ),
