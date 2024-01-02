@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:pixel_adventure/helpers/custom_hitbox.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
@@ -86,7 +86,7 @@ class Fruit extends SpriteAnimationComponent with HasGameReference<PixelAdventur
   }
 
   void collidedWithPlayer() async {
-    if (game.playSoundEffects) FlameAudio.play('pickup_fruit.wav');
+    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/pickup_fruit.wav'));
     animation = _spriteAnimation(6, collected: true);
     game.level.fruitsPoints += game.level.fruits.firstWhere((Fruit fruit) => fruit == this).fruit.value;
     await animationTicker?.completed;

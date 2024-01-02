@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/helpers/custom_hitbox.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
@@ -126,7 +126,7 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
 
   void collidedWithPlayer() async {
     if (game.player.velocity.y > 0 && game.player.y + game.player.height > position.y) {
-      if (game.playSoundEffects) FlameAudio.play('stomp.wav');
+      if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/stomp.wav'));
       gotStomped = true;
       current = ChickenState.hit;
       game.level.enemiesPoints += killPoints;

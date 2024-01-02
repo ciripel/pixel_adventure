@@ -38,7 +38,7 @@ dependencies:
   flame: ^1.12.0
   flame_tiled: ^1.18.1
   pubspec_parse: ^1.2.3
-  flame_audio: ^2.1.5
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +66,7 @@ flutter:
   assets:
       - pubspec.yaml
       - assets/audio/
+      - assets/audio/music/
       - assets/tiles/
       - assets/images/Background/
       - assets/images/Background/Super Mountain Dusk/

@@ -1,7 +1,19 @@
-import 'package:flame_audio/flame_audio.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
+
+enum Songs {
+  song1('snatch-octo_sounds.aac'),
+  song2('funk-upbeat-sigma_music_art.aac'),
+  song3('starlight-qube_sounds.aac'),
+  song4('sugar-rush-octo_sounds.aac'),
+  song5('cheese-crackers-octo_sounds.aac'),
+  song6('getaway-octo_sounds.aac');
+
+  final String filename;
+  const Songs(this.filename);
+}
 
 class MainMenu extends StatelessWidget {
   // Reference to parent game.
@@ -44,8 +56,19 @@ class MainMenu extends StatelessWidget {
                 width: 200,
                 height: 75,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (game.playMusic) FlameAudio.loopLongAudio('snatch-octo_sounds.aac', volume: 0.6);
+                  onPressed: () async {
+                    if (game.playMusic) {
+                      var index = 0;
+                      final player = AudioPlayer()
+                        ..play(AssetSource('audio/music/${Songs.values[index].filename}'), volume: 0.4);
+                      index++;
+
+                      player.onPlayerComplete.listen((_) {
+                        player.play(AssetSource('audio/music/${Songs.values[index].filename}'), volume: 0.4);
+                        index++;
+                        if (index == Songs.values.length) index = 0;
+                      });
+                    }
                     game.overlays.remove('MainMenu');
                   },
                   style: ElevatedButton.styleFrom(

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level_02.tmx",
+    "activeFile": "level_01.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -22,11 +22,11 @@
                 3,
                 2
             ],
-            "scale": 3,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 2192,
-                "y": 359.66666666666663
+                "x": 2397.333333333333,
+                "y": 427.99999999999994
             }
         },
         "level_02.tmx": {
@@ -37,8 +37,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 320,
-                "y": 184
+                "x": 313.5,
+                "y": 177.5
             }
         },
         "level_03.tmx": {
@@ -46,11 +46,11 @@
                 3,
                 2
             ],
-            "scale": 5.5,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 320,
-                "y": 184
+                "x": 521.3333333333333,
+                "y": 244.66666666666663
             }
         },
         "level_04.tmx": {
@@ -81,10 +81,10 @@
     "project": "Pixel Adventure.tiled-project",
     "property.type": "bool",
     "recentFiles": [
-        "level_01.tmx",
         "Pixel Adventure.tsx",
         "level_03.tmx",
         "level_02.tmx",
+        "level_01.tmx",
         "Margins Grass.tsx",
         "level_04.tmx"
     ],

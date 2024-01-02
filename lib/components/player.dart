@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flame_audio/flame_audio.dart';
 import 'package:flutter/services.dart';
 import 'package:pixel_adventure/components/checkpoint.dart';
 import 'package:pixel_adventure/components/chicken.dart';
@@ -216,8 +216,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     game.level.background.parallax!.baseVelocity.x = velocity.x / 10;
   }
 
-  void _playerJump(double dt) {
-    if (game.playSoundEffects) FlameAudio.play('jump.wav');
+  void _playerJump(double dt) async {
+    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/jump.wav'));
+
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
@@ -282,7 +283,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   void _gotHit() {
     if (!gotHit) health--;
-    if (game.playSoundEffects) FlameAudio.play('hit_hurt.wav');
+    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/hit_hurt.wav'));
     if (health <= 0) return;
 
     gotHit = true;
@@ -297,7 +298,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     final fallen = position.y > game.level.levelName.levelHeight + size.y && !gotHit;
 
     if (!fallen) return;
-    if (game.playSoundEffects) FlameAudio.play('hit_hurt.wav');
+    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/hit_hurt.wav'));
     health--;
     if (health <= 0) return;
 
@@ -318,7 +319,7 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _finishedLevel() {
-    if (game.playSoundEffects) FlameAudio.play('end_level.wav');
+    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/end_level.wav'));
     current = PlayerState.running;
     game.level.complete = true;
     game.level.stopwatch.stop();

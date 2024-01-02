@@ -29,7 +29,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
   bool isMobile = false;
   bool playSoundEffects = true;
   double soundEffectsVolume = 1.0;
-  bool playMusic = false;
+  bool playMusic = true;
 
   @override
   FutureOr<void> onLoad() async {
