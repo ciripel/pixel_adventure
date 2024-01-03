@@ -27,7 +27,6 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
 
   @override
   void update(double dt) {
-    _printLives();
     _scoreTextComponent.text = '${game.player.totalScore}';
     _timerTextComponent.text = format(game.level.stopwatch.elapsed);
   }
