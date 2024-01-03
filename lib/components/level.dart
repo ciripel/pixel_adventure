@@ -18,9 +18,9 @@ import 'package:pixel_adventure/pixel_adventure.dart';
 enum LevelName {
   level_01(
     maxPointsCoefficient: 60000,
-    levelHeight: 464,
-    background: CustomShape.rectangle(left: 16, top: 16, width: 3856, height: 432),
-    cameraBounds: CustomShape.rectangle(left: -1082, top: -512, width: 6052, height: 1489),
+    levelHeight: 368,
+    background: CustomShape.rectangle(left: 0, top: 0, width: 640, height: 368),
+    cameraBounds: CustomShape.rectangle(left: -1092, top: -512, width: 2824, height: 1397),
   ),
   level_02(
     maxPointsCoefficient: 60000,
@@ -33,6 +33,12 @@ enum LevelName {
     levelHeight: 368,
     background: CustomShape.rectangle(left: 0, top: 0, width: 640, height: 368),
     cameraBounds: CustomShape.rectangle(left: -1092, top: -512, width: 2824, height: 1397),
+  ),
+  level_04(
+    maxPointsCoefficient: 600000,
+    levelHeight: 464,
+    background: CustomShape.rectangle(left: 16, top: 16, width: 3856, height: 432),
+    cameraBounds: CustomShape.rectangle(left: -1082, top: -512, width: 6052, height: 1489),
   );
 
   final int maxPointsCoefficient;
