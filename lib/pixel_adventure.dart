@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
@@ -22,15 +23,20 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
 
   final player = Player();
   late Level level;
-  late JoystickComponent _joystick;
+  late JoystickComponent joystick;
   bool useJoystick = false;
-  late LeftButton _leftButton;
-  late RightButton _rightButton;
+  late LeftButton leftButton;
+  late RightButton rightButton;
   late JumpButton _jumpButton;
   bool isMobile = false;
+
   bool playSoundEffects = true;
   double soundEffectsVolume = 1.0;
+
   bool playMusic = true;
+  double musicVolume = 0.2;
+
+  late AudioPlayer musicPlayer;
 
   @override
   FutureOr<void> onLoad() async {
@@ -38,8 +44,8 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
     await images.loadAllImages();
     isMobile = defaultTargetPlatform == TargetPlatform.android || defaultTargetPlatform == TargetPlatform.android;
 
-    if (isMobile) _addControls();
-    _setCamera();
+    if (isMobile) addControls();
+    setCamera();
 
     initializeGame(loadHud: true);
 
@@ -53,8 +59,8 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
     super.update(dt);
   }
 
-  void _addControls() async {
-    _joystick = JoystickComponent(
+  void addControls() async {
+    joystick = JoystickComponent(
       knob: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Knob.png'))),
       background: SpriteComponent(sprite: Sprite(images.fromCache('HUD/Joystick.png'))),
       anchor: Anchor.bottomLeft,
@@ -64,31 +70,22 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
       ),
     );
 
-    _leftButton = LeftButton();
-    _rightButton = RightButton();
+    leftButton = LeftButton();
+    rightButton = RightButton();
     _jumpButton = JumpButton();
-
-    if (useJoystick) addAll([_joystick, _jumpButton]);
-
-    if (!useJoystick) addAll([_leftButton, _rightButton, _jumpButton]);
   }
 
-  void _setCamera() {
+  void setCamera() {
     camera = CameraComponent.withFixedResolution(
       width: Constants.horizontalResolution,
       height: Constants.verticalResolution,
-      hudComponents: isMobile
-          ? useJoystick
-              ? [_joystick, _jumpButton]
-              : [_leftButton, _rightButton, _jumpButton]
-          : [],
     );
 
     camera.follow(player);
   }
 
   void _updateJoystick() {
-    switch (_joystick.direction) {
+    switch (joystick.direction) {
       case JoystickDirection.left:
       case JoystickDirection.upLeft:
       case JoystickDirection.downLeft:
@@ -125,6 +122,11 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
       considerViewport: true,
     );
 
-    if (loadHud) camera.viewport.add(Hud());
+    if (loadHud) {
+      camera.viewport.add(Hud());
+      if (!isMobile) return;
+      if (useJoystick) camera.viewport.addAll([joystick, _jumpButton]);
+      if (!useJoystick) camera.viewport.addAll([leftButton, rightButton, _jumpButton]);
+    }
   }
 }

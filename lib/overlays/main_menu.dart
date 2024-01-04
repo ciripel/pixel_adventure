@@ -59,12 +59,18 @@ class MainMenu extends StatelessWidget {
                   onPressed: () async {
                     if (game.playMusic) {
                       var index = 0;
-                      final player = AudioPlayer()
-                        ..play(AssetSource('audio/music/${Songs.values[index].filename}'), volume: 0.4);
+                      game.musicPlayer = AudioPlayer()
+                        ..play(
+                          AssetSource('audio/music/${Songs.values[index].filename}'),
+                          volume: game.musicVolume,
+                        );
                       index++;
 
-                      player.onPlayerComplete.listen((_) {
-                        player.play(AssetSource('audio/music/${Songs.values[index].filename}'), volume: 0.4);
+                      game.musicPlayer.onPlayerComplete.listen((_) {
+                        game.musicPlayer.play(
+                          AssetSource('audio/music/${Songs.values[index].filename}'),
+                          volume: game.musicVolume,
+                        );
                         index++;
                         if (index == Songs.values.length) index = 0;
                       });

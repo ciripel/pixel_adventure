@@ -126,7 +126,9 @@ class Chicken extends SpriteAnimationGroupComponent<ChickenState> with HasGameRe
 
   void collidedWithPlayer() async {
     if (game.player.velocity.y > 0 && game.player.y + game.player.height > position.y) {
-      if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/stomp.wav'));
+      if (game.playSoundEffects) {
+        AudioPlayer().play(AssetSource('audio/stomp.wav'), volume: game.soundEffectsVolume);
+      }
       gotStomped = true;
       current = ChickenState.hit;
       game.level.enemiesPoints += killPoints;

@@ -45,7 +45,9 @@ class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventur
   }
 
   void collidedWithPlayer() async {
-    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/pickup_fruit.wav'));
+    if (game.playSoundEffects) {
+      AudioPlayer().play(AssetSource('audio/pickup_fruit.wav'), volume: game.soundEffectsVolume);
+    }
     animation = _spriteAnimation(6, collected: true);
     game.player.health++;
     await animationTicker?.completed;

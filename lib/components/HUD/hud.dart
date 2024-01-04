@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:pixel_adventure/components/HUD/health.dart';
+import 'package:pixel_adventure/components/HUD/settings_button.dart';
 import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/helpers/utils.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
@@ -22,6 +23,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
   Future<void> onLoad() async {
     _printLives();
     _printTimer();
+    _printSettingsBtn();
     await _printScore();
   }
 
@@ -49,7 +51,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
       text: '${game.player.totalScore}',
       textRenderer: TextPaint(style: Constants.hudTextStyle),
       anchor: Anchor.centerRight,
-      position: Vector2(game.size.x - 35, 20),
+      position: Vector2(game.size.x - 70, 20),
     );
     add(_scoreTextComponent);
 
@@ -58,7 +60,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
       SpriteComponent(
         priority: priority,
         sprite: fruitSprite,
-        position: Vector2(game.size.x - 20, 20),
+        position: Vector2(game.size.x - 55, 20),
         size: Vector2.all(32),
         anchor: Anchor.center,
       ),
@@ -73,5 +75,10 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
       position: Vector2(game.size.x / 2, 20),
     );
     add(_timerTextComponent);
+  }
+
+  void _printSettingsBtn() async {
+    final settingsBtn = SettingsButton();
+    add(settingsBtn);
   }
 }

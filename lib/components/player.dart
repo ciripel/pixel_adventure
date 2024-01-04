@@ -217,7 +217,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _playerJump(double dt) async {
-    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/jump.wav'));
+    if (game.playSoundEffects) {
+      AudioPlayer().play(AssetSource('audio/jump.wav'), volume: game.soundEffectsVolume);
+    }
 
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
@@ -283,7 +285,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
 
   void _gotHit() {
     if (!gotHit) health--;
-    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/hit_hurt.wav'));
+    if (game.playSoundEffects) {
+      AudioPlayer().play(AssetSource('audio/hit_hurt.wav'), volume: game.soundEffectsVolume);
+    }
     if (health <= 0) return;
 
     gotHit = true;
@@ -298,7 +302,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
     final fallen = position.y > game.level.levelName.levelHeight + size.y && !gotHit;
 
     if (!fallen) return;
-    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/hit_hurt.wav'));
+    if (game.playSoundEffects) {
+      AudioPlayer().play(AssetSource('audio/hit_hurt.wav'), volume: game.soundEffectsVolume);
+    }
     health--;
     if (health <= 0) return;
 
@@ -319,7 +325,9 @@ class Player extends SpriteAnimationGroupComponent<PlayerState>
   }
 
   void _finishedLevel() {
-    if (game.playSoundEffects) AudioPlayer().play(AssetSource('audio/end_level.wav'));
+    if (game.playSoundEffects) {
+      AudioPlayer().play(AssetSource('audio/end_level.wav'), volume: game.soundEffectsVolume);
+    }
     current = PlayerState.running;
     game.level.complete = true;
     game.level.stopwatch.stop();
