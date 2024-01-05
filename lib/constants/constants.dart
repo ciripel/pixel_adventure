@@ -10,6 +10,8 @@ abstract class Constants {
 
   static const double tileSize = 16;
 
+  static const int maxPlayerLives = 10;
+
   //text style
   static const hudTextStyle = TextStyle(
     fontSize: 10,

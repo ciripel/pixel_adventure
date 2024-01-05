@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:pixel_adventure/constants/constants.dart';
 import 'package:pixel_adventure/helpers/custom_shape.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 
@@ -49,7 +50,7 @@ class Heart extends SpriteAnimationComponent with HasGameReference<PixelAdventur
       AudioPlayer().play(AssetSource('audio/pickup_fruit.wav'), volume: game.soundEffectsVolume);
     }
     animation = _spriteAnimation(6, collected: true);
-    game.player.health++;
+    if (game.player.health < Constants.maxPlayerLives) game.player.health++;
     await animationTicker?.completed;
     removeFromParent();
   }

@@ -34,7 +34,7 @@ class Hud extends PositionComponent with HasGameReference<PixelAdventure> {
   }
 
   void _printLives() {
-    for (var i = 1; i <= game.player.health; i++) {
+    for (var i = 1; i <= Constants.maxPlayerLives; i++) {
       final positionX = 10 * i;
       add(
         Health(
