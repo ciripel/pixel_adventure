@@ -165,6 +165,7 @@ class PixelAdventure extends FlameGame with HasKeyboardHandlerComponents, HasCol
     );
 
     wcUri = resp.uri;
+    debugPrint('$wcUri');
 
     // When completed hide the QR_Modal and show Main Menu
     resp.session.future.then((session) {
