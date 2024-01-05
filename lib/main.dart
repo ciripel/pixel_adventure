@@ -7,6 +7,7 @@ import 'package:pixel_adventure/overlays/game_over.dart';
 import 'package:pixel_adventure/overlays/level_complete.dart';
 import 'package:pixel_adventure/overlays/main_menu.dart';
 import 'package:pixel_adventure/overlays/options_menu.dart';
+import 'package:pixel_adventure/overlays/wc_qr_modal.dart';
 import 'package:pixel_adventure/pixel_adventure.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
@@ -15,8 +16,8 @@ void main() async {
   await Flame.device.fullScreen();
   await Flame.device.setLandscape();
   final version = Pubspec.parse(await rootBundle.loadString('pubspec.yaml')).version.toString();
-
   final game = PixelAdventure();
+
   runApp(
     MaterialApp(
       home: GameWidget(
@@ -26,8 +27,9 @@ void main() async {
           'LevelComplete': (_, PixelAdventure game) => LevelComplete(game: game),
           'GameOver': (_, PixelAdventure game) => GameOver(game: game),
           'OptionsMenu': (_, PixelAdventure game) => OptionsMenu(game: game),
+          'WcQrModal': (_, PixelAdventure game) => WcQrModal(game: game),
         },
-        initialActiveOverlays: const ['MainMenu'],
+        initialActiveOverlays: const ['WcQrModal'],
       ),
     ),
   );

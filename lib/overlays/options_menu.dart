@@ -15,6 +15,12 @@ class _OptionsMenuState extends State<OptionsMenu> {
   Widget build(BuildContext context) {
     const blackTextColor = Color.fromRGBO(0, 0, 0, 0.6);
     const whiteTextColor = Color.fromRGBO(255, 255, 255, 0.9);
+    final session = widget.game.wcSession;
+    late String firstAccount;
+    if (session.namespaces['eip155'] == null) firstAccount = 'not available on EIP155';
+    firstAccount = session.namespaces['eip155']!.accounts[0];
+    final address = firstAccount.split(':')[2];
+    final shownAddress = '${address.substring(0, 7)}..${address.substring(address.length - 5, address.length)}';
 
     return Material(
       color: Colors.transparent,
@@ -40,6 +46,16 @@ class _OptionsMenuState extends State<OptionsMenu> {
                 ),
               ),
               const SizedBox(height: 15),
+              Text(
+                shownAddress,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: whiteTextColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -48,7 +64,7 @@ class _OptionsMenuState extends State<OptionsMenu> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: whiteTextColor,
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                   Checkbox(
